@@ -1,0 +1,117 @@
+.chatbot-container {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  z-index: 9999;
+}
+  
+  /* Chatbot Toggle Button */
+  .chatbot-toggle {
+    width: 90px;
+    height: auto;
+    border-radius: 25%;
+    background-color: black;
+    border-color: gray;
+    color: white;
+    border: 3px solid gray; /* Solid border to prevent breaking */
+    font-size: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    cursor: pointer;
+  }
+  
+
+
+/* Hover effect */
+.chatbot-toggle:hover {
+    background-color: #333; /* Darker black */
+    border-color: white; /* Change border color */
+    transform: scale(1.1); /* Slightly increase size */
+}
+  
+  /* Chatbot Popup */
+  .chatbot-box {
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    width: 320px;
+    border-radius: 10px;
+    background: white;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Chatbot Header */
+  .chatbot-header {
+    background:black;
+    color: white;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+  
+  /* Chat Messages */
+  .chatbot-messages {
+    height: 300px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Message Styles */
+  .chat-message {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .chat-bubble {
+    padding: 10px;
+    border-radius: 10px;
+    max-width: 70%;
+  }
+  
+  .bot-message .chat-bubble {
+    background: #f1f1f1;
+    color: black;
+  }
+  
+  .user-message {
+    justify-content: flex-end;
+  }
+  
+  .user-message .chat-bubble {
+    background: black;
+    color: white;
+  }
+  
+  /* Chat Input */
+  .chatbot-input input {
+    border-radius: 20px;
+  }
+  
+  .chatbot-input button {
+    border-radius: 50%;
+  }
+  
+  /* Chatbot Icon */
+  .chat-icon {
+    width: 30px;
+    height: 30px;
+    margin-right: 8px;
+  }
+  
+  .chatbot-box img {
+    max-width: 20px; /* Adjust width */
+    max-height: 20px; /* Adjust height */
+    display: block;
+    margin: 0 auto;
+  }
+  .sendbut {
+    cursor: pointer;
+  }
+  .sendbut:hover {
+    border-color: white; /* Change border color */
+    transform: scale(1.2); /* Slightly increase size */
+}

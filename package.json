@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "react-medium-image-zoom": "^5.2.14",
+    "react-to-pdf": "^1.0.1"
+  }
+}
