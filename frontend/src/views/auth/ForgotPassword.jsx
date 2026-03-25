@@ -6,31 +6,7 @@ import Swal from 'sweetalert2'
 import { useNavigate } from 'react-router-dom';
 
 function ForgotPassword() {
-
-    // const [email, setEmail] = useState("")
-
-    // const axios = apiInstance
-    // const [searchParams] = useSearchParams();
-    // const otp = searchParams.get('otp');
-    // const uuid = searchParams.get('uuid');
-    // const navigate = useNavigate();
-    // const handleEmailChange = (event) => {
-    //     setEmail(event.target.value)
-    //     console.log(event.target.value);
-    // }
-
-
-    // const handleEmailSubmit = () => {
-    //     axios.get(`user/password-reset/${email}/`).then((res) => {
-    //         console.log(res.data);
-    //         Swal.fire({
-    //             icon: 'success',
-    //             title: 'Password Reset Email Sent!',
-    //         }).then(() => {
-    //             navigate('/CreatePassword.jsx'); 
-    //         });
-    //     })
-    // }
+    
         const [email, setEmail] = useState("");
         const navigate = useNavigate();
          const axios = apiInstance;
