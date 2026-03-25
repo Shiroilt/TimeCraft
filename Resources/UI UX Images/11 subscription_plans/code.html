@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TimeCraft | Exclusive Membership</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#e0ac29",
+                        "background-light": "#f8f7f6",
+                        "background-dark": "#121212",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-header {
+            background: rgba(18, 18, 18, 0.8);
+            backdrop-filter: blur(12px);
+        }
+        .comparison-gradient {
+            background: linear-gradient(180deg, rgba(224, 172, 41, 0.05) 0%, rgba(18, 18, 18, 0) 100%);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased">
+<!-- Top Navigation -->
+<header class="sticky top-0 z-50 glass-header border-b border-white/10">
+<div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-3xl">watch</span>
+<span class="text-xl font-extrabold tracking-tight uppercase">TimeCraft</span>
+</div>
+<nav class="hidden md:flex items-center gap-10">
+<a class="text-sm font-medium hover:text-primary transition-colors uppercase tracking-widest" href="#">Collection</a>
+<a class="text-sm font-medium hover:text-primary transition-colors uppercase tracking-widest" href="#">Showroom</a>
+<a class="text-sm font-medium hover:text-primary transition-colors uppercase tracking-widest" href="#">Services</a>
+<a class="text-sm font-medium text-primary uppercase tracking-widest" href="#">Membership</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="px-6 py-2.5 bg-primary text-background-dark text-xs font-bold uppercase tracking-widest rounded transition-transform active:scale-95">
+                    Sign In
+                </button>
+</div>
+</div>
+</header>
+<main class="min-h-screen">
+<!-- Hero Section -->
+<section class="relative pt-20 pb-16 px-6 overflow-hidden">
+<div class="absolute inset-0 z-0 opacity-20 pointer-events-none">
+<div class="absolute top-0 left-1/2 -translate-x-1/2 w-[1200px] h-[600px] bg-primary/20 blur-[120px] rounded-full"></div>
+</div>
+<div class="max-w-4xl mx-auto text-center relative z-10">
+<span class="inline-block py-1 px-3 bg-primary/10 border border-primary/20 text-primary text-[10px] font-bold uppercase tracking-[0.3em] mb-6 rounded-full">
+                    Exclusive Access
+                </span>
+<h1 class="text-5xl md:text-7xl font-light tracking-tight mb-8">
+                    Craft Your <span class="font-bold text-primary">Legacy</span>
+</h1>
+<p class="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed font-light">
+                    Experience the pinnacle of horological care. From entry-level maintenance to high-collector concierge services, choose the tier that matches your passion.
+                </p>
+</div>
+</section>
+<!-- Membership Tiers Grid -->
+<section class="max-w-7xl mx-auto px-6 py-12">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Silver Tier -->
+<div class="group relative bg-white/5 border border-white/10 rounded-xl p-8 flex flex-col hover:border-white/30 transition-all duration-300">
+<div class="mb-8">
+<h3 class="text-xl font-bold mb-2">Silver</h3>
+<p class="text-slate-400 text-sm font-light">The essential collector starter.</p>
+</div>
+<div class="mb-8 flex items-baseline gap-1">
+<span class="text-4xl font-bold">$49</span>
+<span class="text-slate-500 text-sm">/month</span>
+</div>
+<ul class="space-y-4 mb-10 flex-grow">
+<li class="flex items-center gap-3 text-sm text-slate-300">
+<span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                            Free basic servicing
+                        </li>
+<li class="flex items-center gap-3 text-sm text-slate-300">
+<span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                            Standard email support
+                        </li>
+<li class="flex items-center gap-3 text-sm text-slate-300">
+<span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                            1-year extended warranty
+                        </li>
+</ul>
+<button class="w-full py-4 bg-white/10 hover:bg-white/20 text-white text-xs font-bold uppercase tracking-widest rounded transition-colors">
+                        Select Silver
+                    </button>
+</div>
+<!-- Gold Tier -->
+<div class="group relative bg-primary/5 border-2 border-primary rounded-xl p-8 flex flex-col shadow-[0_0_40px_-10px_rgba(224,172,41,0.3)] transform md:-translate-y-4">
+<div class="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-primary text-background-dark text-[10px] font-black uppercase tracking-widest rounded-full">
+                        Most Popular
+                    </div>
+<div class="mb-8">
+<h3 class="text-xl font-bold mb-2 text-primary">Gold</h3>
+<p class="text-slate-400 text-sm font-light">For the serious enthusiast.</p>
+</div>
+<div class="mb-8 flex items-baseline gap-1">
+<span class="text-4xl font-bold">$99</span>
+<span class="text-slate-500 text-sm">/month</span>
+</div>
+<ul class="space-y-4 mb-10 flex-grow">
+<li class="flex items-center gap-3 text-sm text-slate-100">
+<span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                            Annual watch polishing
+                        </li>
+<li class="flex items-center gap-3 text-sm text-slate-100">
+<span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                            Priority ticket support
+                        </li>
+<li class="flex items-center gap-3 text-sm text-slate-100">
+<span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                            2-year extended warranty
+                        </li>
+<li class="flex items-center gap-3 text-sm text-slate-100">
+<span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                            Insured global shipping
+                        </li>
+</ul>
+<button class="w-full py-4 bg-primary text-background-dark hover:bg-primary/90 text-xs font-bold uppercase tracking-widest rounded transition-transform active:scale-95">
+                        Select Gold
+                    </button>
+</div>
+<!-- Platinum Tier -->
+<div class="group relative bg-white/5 border border-white/10 rounded-xl p-8 flex flex-col hover:border-white/30 transition-all duration-300">
+<div class="mb-8">
+<div class="flex justify-between items-start">
+<h3 class="text-xl font-bold mb-2">Platinum</h3>
+<span class="material-symbols-outlined text-primary animate-pulse">workspace_premium</span>
+</div>
+<p class="text-slate-400 text-sm font-light">The connoisseur's choice.</p>
+</div>
+<div class="mb-8 flex items-baseline gap-1">
+<span class="text-4xl font-bold">$249</span>
+<span class="text-slate-500 text-sm">/month</span>
+</div>
+<ul class="space-y-4 mb-10 flex-grow">
+<li class="flex items-center gap-3 text-sm text-slate-300">
+<span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                            Lifetime unlimited servicing
+                        </li>
+<li class="flex items-center gap-3 text-sm text-slate-300">
+<span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                            24/7 Concierge hotline
+                        </li>
+<li class="flex items-center gap-3 text-sm text-slate-300">
+<span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                            5-year extended warranty
+                        </li>
+<li class="flex items-center gap-3 text-sm text-slate-300">
+<span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                            VIP limited edition access
+                        </li>
+</ul>
+<button class="w-full py-4 bg-white/10 hover:bg-white/20 text-white text-xs font-bold uppercase tracking-widest rounded transition-colors">
+                        Select Platinum
+                    </button>
+</div>
+</div>
+</section>
+<!-- Feature Comparison Section -->
+<section class="max-w-7xl mx-auto px-6 py-24">
+<div class="text-center mb-16">
+<h2 class="text-3xl font-bold tracking-tight mb-4">Compare Benefits</h2>
+<p class="text-slate-400">Everything you need to know about our tiered services.</p>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-white/10">
+<th class="py-6 px-4 text-xs font-black uppercase tracking-widest text-slate-500">Service Feature</th>
+<th class="py-6 px-4 text-xs font-black uppercase tracking-widest text-center text-slate-300">Silver</th>
+<th class="py-6 px-4 text-xs font-black uppercase tracking-widest text-center text-primary">Gold</th>
+<th class="py-6 px-4 text-xs font-black uppercase tracking-widest text-center text-slate-300">Platinum</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-white/5">
+<tr class="hover:bg-white/5 transition-colors">
+<td class="py-6 px-4 text-sm font-medium">Mechanical Authentication</td>
+<td class="py-6 px-4 text-center"><span class="material-symbols-outlined text-primary">check</span></td>
+<td class="py-6 px-4 text-center"><span class="material-symbols-outlined text-primary">check</span></td>
+<td class="py-6 px-4 text-center"><span class="material-symbols-outlined text-primary">check</span></td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors">
+<td class="py-6 px-4 text-sm font-medium">Valuation &amp; Appraisal</td>
+<td class="py-6 px-4 text-center"><span class="material-symbols-outlined text-slate-700">horizontal_rule</span></td>
+<td class="py-6 px-4 text-center"><span class="material-symbols-outlined text-primary">check</span></td>
+<td class="py-6 px-4 text-center"><span class="material-symbols-outlined text-primary">check</span></td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors">
+<td class="py-6 px-4 text-sm font-medium">Global Insured Pickup</td>
+<td class="py-6 px-4 text-center"><span class="material-symbols-outlined text-slate-700">horizontal_rule</span></td>
+<td class="py-6 px-4 text-center"><span class="material-symbols-outlined text-slate-700">horizontal_rule</span></td>
+<td class="py-6 px-4 text-center"><span class="material-symbols-outlined text-primary">check</span></td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors">
+<td class="py-6 px-4 text-sm font-medium">Private Auction Access</td>
+<td class="py-6 px-4 text-center"><span class="material-symbols-outlined text-slate-700">horizontal_rule</span></td>
+<td class="py-6 px-4 text-center"><span class="material-symbols-outlined text-primary">check</span></td>
+<td class="py-6 px-4 text-center"><span class="material-symbols-outlined text-primary">check</span></td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors">
+<td class="py-6 px-4 text-sm font-medium">Movement Calibration</td>
+<td class="py-6 px-4 text-center">Basic</td>
+<td class="py-6 px-4 text-center">Advanced</td>
+<td class="py-6 px-4 text-center">Master Chronometer</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors">
+<td class="py-6 px-4 text-sm font-medium">Replacement Parts Cost</td>
+<td class="py-6 px-4 text-center">Full Price</td>
+<td class="py-6 px-4 text-center">20% Discount</td>
+<td class="py-6 px-4 text-center">Inclusive</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- Newsletter / CTA -->
+<section class="max-w-7xl mx-auto px-6 py-20">
+<div class="bg-gradient-to-r from-primary/20 to-primary/5 rounded-3xl p-12 flex flex-col md:flex-row items-center justify-between gap-10 border border-primary/20">
+<div class="max-w-xl">
+<h2 class="text-3xl font-bold mb-4">Join the Inner Circle</h2>
+<p class="text-slate-400 font-light">Get the latest updates on rare horological finds and exclusive member events directly in your inbox.</p>
+</div>
+<div class="flex w-full md:w-auto gap-2">
+<input class="flex-grow md:w-80 bg-background-dark border-white/10 rounded px-6 py-4 focus:ring-primary focus:border-primary text-sm font-light" placeholder="Email Address" type="email"/>
+<button class="px-8 py-4 bg-primary text-background-dark text-xs font-bold uppercase tracking-widest rounded whitespace-nowrap">Subscribe</button>
+</div>
+</div>
+</section>
+<!-- Image Gallery / Visual reinforcement -->
+<section class="max-w-7xl mx-auto px-6 py-12">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 h-[300px]">
+<div class="rounded-xl overflow-hidden bg-white/5">
+<img class="w-full h-full object-cover opacity-60 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-700 cursor-pointer" data-alt="Close up of a luxury watch face and hands" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0Ko4JmVvQDy_re6DRE5FywrsmSCrpXe3_ApDwKLvr5QpQ3F_lcQlldak5oNQTm337NCsnkllAMs62wFOjhSHe59l0Kkke78lXXnE8l-_DaSsb2oS2753s2CmsNWN7-Ar5V48oGnlqU9JFUjaWKXEfdMk8ShrQ3y9UPW-69rm9fCf6f5tFUATdqOQ2ncgdHls4DUhsCpA6qGj1jktOG8H5KFB7CAwhDv9A-S_ThIbkhBE6xIeKd7-vW6J1tELjW4Kt5jCpB5knuIGK"/>
+</div>
+<div class="rounded-xl overflow-hidden bg-white/5">
+<img class="w-full h-full object-cover opacity-60 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-700 cursor-pointer" data-alt="Watch gears and mechanical movement details" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCG971Qpzl88kKhCtM172Q6kjYzPhuWuxEEZKBdvdc-TSy36SUqu9DWnuEy5iJiTIBKEgR2M_UT8e0cktdeI6YzWoGS8kz5g5cEftMTF-wpweapkq0Jbp2eoQInoGpPJTz04UlTm9y5RgB5clCTABwrEg8nM7FaJQnLjyLi4LiereUxR-h-RtCZ-n1FJ3i6u0zuZPzTGZAUOHT34F8FcA6xsztJKIPU-Fu3QITmO3LmhUVlKueTKtjd2lLcygEYcOTAFg8kOq7j0NA5"/>
+</div>
+<div class="rounded-xl overflow-hidden bg-white/5">
+<img class="w-full h-full object-cover opacity-60 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-700 cursor-pointer" data-alt="Sophisticated gold watch on leather strap" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZBezChQRohnBawSarmXiQj_ttrixSTJ4p6-fXbAT3xhNxiiqQqQrNh9eOWRp8w9wNO_OGtVlU-ziKBZwG1mpFo-O9jA25YlYePVOs03lepQg15PEa176gkVAbH7-oHIwEiXsXKI9vNP_yBrkAe1Xov9rhu7Uj7PfSy2SWdT9YIo-7dM66iUC623ZEJI3wr6DOTPaXZri0wjj9RCPPO4hU6tkg1r1J5z1FJZnsAM-pxW3_EyYmP9klAXTj57RSQxWC5faAT_4b3FEG"/>
+</div>
+<div class="rounded-xl overflow-hidden bg-white/5">
+<img class="w-full h-full object-cover opacity-60 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-700 cursor-pointer" data-alt="Luxury jewelry and watch display box" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9kG1zlnH7_NRzXZfjwOrPl8GQD-fYTjyvB7ud277_ApSAxU140curTUVROMiwxJEDNMpxRf6Bbmw65ecncA9w6NSbguem5CQWOZhvOpfSjamNDhNCfLHLN6JfXfMIuaepn0BQFLkVN9EDUVyHsWVyt7OIfrPrA4CcOuQcZyPGXUZ2D1Cwwe9CVke-EJlOTiaG6IaDJhbnjwkz2jxVgKO7P_XjPCVsEoOw1WH39dwiKkju0prdR6FYAJJGiGcf21otsXr7kolS54a9"/>
+</div>
+</div>
+</section>
+</main>
+<footer class="bg-background-dark border-t border-white/10 pt-20 pb-10">
+<div class="max-w-7xl mx-auto px-6">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+<div class="col-span-1 md:col-span-1">
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-primary text-2xl">watch</span>
+<span class="text-lg font-extrabold tracking-tight uppercase">TimeCraft</span>
+</div>
+<p class="text-slate-500 text-sm leading-relaxed font-light">
+                        Preserving horological masterpieces for the next generation of collectors. Excellence in every second.
+                    </p>
+</div>
+<div>
+<h4 class="text-white text-xs font-bold uppercase tracking-widest mb-6">Explore</h4>
+<ul class="space-y-4">
+<li><a class="text-slate-500 hover:text-primary text-sm transition-colors" href="#">Marketplace</a></li>
+<li><a class="text-slate-500 hover:text-primary text-sm transition-colors" href="#">Authentication</a></li>
+<li><a class="text-slate-500 hover:text-primary text-sm transition-colors" href="#">Journal</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-white text-xs font-bold uppercase tracking-widest mb-6">Company</h4>
+<ul class="space-y-4">
+<li><a class="text-slate-500 hover:text-primary text-sm transition-colors" href="#">About Us</a></li>
+<li><a class="text-slate-500 hover:text-primary text-sm transition-colors" href="#">Careers</a></li>
+<li><a class="text-slate-500 hover:text-primary text-sm transition-colors" href="#">Press Kit</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-white text-xs font-bold uppercase tracking-widest mb-6">Support</h4>
+<ul class="space-y-4">
+<li><a class="text-slate-500 hover:text-primary text-sm transition-colors" href="#">Help Center</a></li>
+<li><a class="text-slate-500 hover:text-primary text-sm transition-colors" href="#">Terms of Service</a></li>
+<li><a class="text-slate-500 hover:text-primary text-sm transition-colors" href="#">Privacy Policy</a></li>
+</ul>
+</div>
+</div>
+<div class="border-t border-white/5 pt-10 flex flex-col md:row items-center justify-between gap-4">
+<p class="text-slate-600 text-xs uppercase tracking-widest">© 2024 TimeCraft Horological Group. All Rights Reserved.</p>
+<div class="flex items-center gap-6">
+<a class="text-slate-500 hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">share</span></a>
+<a class="text-slate-500 hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">public</span></a>
+</div>
+</div>
+</div>
+</footer>
+</body></html>

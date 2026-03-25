@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TimeCraft | User Profile</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#e0ac29",
+                        "background-light": "#f8f7f6",
+                        "background-dark": "#121212",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Manrope', sans-serif;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #1a1a1a;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #e0ac2933;
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #e0ac29;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 antialiased">
+<div class="flex min-h-screen">
+<!-- SideNavBar Component -->
+<aside class="w-64 border-r border-primary/10 bg-background-light dark:bg-[#0a0a0a] hidden md:flex flex-col fixed h-full z-50">
+<div class="p-6 flex items-center gap-3">
+<div class="size-8 bg-primary rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-background-dark font-bold">watch</span>
+</div>
+<span class="text-xl font-extrabold tracking-tight text-primary">TIMECRAFT</span>
+</div>
+<nav class="flex-1 px-4 py-4 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary/10 text-primary" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="text-sm font-medium">Profile Overview</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-400 hover:text-primary hover:bg-primary/5 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="location_on">location_on</span>
+<span class="text-sm font-medium">Saved Addresses</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-400 hover:text-primary hover:bg-primary/5 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="card_membership">card_membership</span>
+<span class="text-sm font-medium">Subscriptions</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-400 hover:text-primary hover:bg-primary/5 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="watch">watch</span>
+<span class="text-sm font-medium">My Collection</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-400 hover:text-primary hover:bg-primary/5 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="security">security</span>
+<span class="text-sm font-medium">Security</span>
+</a>
+</nav>
+<div class="p-4 border-t border-primary/10">
+<div class="flex items-center gap-3 p-2 rounded-xl bg-primary/5">
+<div class="size-10 rounded-full border border-primary/20 bg-cover bg-center" data-alt="User avatar of Alexander Horologist" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD06jemhK0m7f1G4k6QbXppAyjRQP-7F6S5KeBAX2KWoW0CK2HR_6ASO6gCgSM2X38AdtqAIgraQqVDT7eKOXsnoYJ1KyI1HRIHki-zOsn9LDDP2_-8-J5OGedhFCv3yyf1nSv8h3HNCKDU1U9LktggplpYGe-HlR9Vke45zPCCtu4Yleg4z_DV1uoMjHwMXlBJaBrIPrtYMiVIpmLdkBIG8ReNkLkf3B6KdKrWFSFZY_X_Sc12MjzmWIvJIWdAL8wSP0RgiIpd_XSa')"></div>
+<div class="flex flex-col">
+<span class="text-xs font-bold text-primary uppercase tracking-wider">Master Horologist</span>
+<span class="text-sm font-semibold truncate">Alexander H.</span>
+</div>
+</div>
+<button class="w-full mt-4 flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-primary text-background-dark text-sm font-bold hover:brightness-110 transition-all">
+<span class="material-symbols-outlined text-sm">logout</span>
+                Logout
+            </button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-64 p-4 lg:p-8">
+<div class="max-w-6xl mx-auto space-y-8">
+<!-- Profile Header -->
+<header class="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-primary/10">
+<div class="flex items-center gap-6">
+<div class="relative group">
+<div class="size-24 md:size-32 rounded-xl border-2 border-primary/30 p-1">
+<div class="w-full h-full rounded-lg bg-cover bg-center" data-alt="Portrait of Alexander Horologist" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBkqta61bGi7EvO8qm6t4VEA0G4D8U2ojUDNfQuixwrwE89OKbK8DSVps6XqL8BwBb0iTBl9GBXmr3E6Zsl_nAECvIOItLhDoR35RydDrXcPIgEcAI1bpJ5H8OH0dsS_1n2dWwZJaZ7Ppxr1XR8eL-kynQrm2oA6otbQU9uZpEDk2rMIp-iUHBvld5fM-XMReR5Xr977CA9JSSxhY1ye_BY5CtWeKE4I89fhHWAOG4zOjs_8EiUFx6HlwCFuCR7I0lYM6kL0o0m2Wdv')"></div>
+</div>
+<button class="absolute -bottom-2 -right-2 size-8 bg-primary rounded-full flex items-center justify-center text-background-dark shadow-xl">
+<span class="material-symbols-outlined text-sm">edit</span>
+</button>
+</div>
+<div>
+<h1 class="text-3xl font-bold tracking-tight">Alexander Horologist</h1>
+<p class="text-slate-400 mt-1">alexander.h@timecraft.luxury</p>
+<div class="flex items-center gap-4 mt-3">
+<span class="px-3 py-1 bg-primary/20 text-primary text-xs font-bold rounded-full uppercase tracking-tighter">Gold Member</span>
+<span class="text-xs text-slate-500 font-medium italic">Member since October 2021</span>
+</div>
+</div>
+</div>
+<div class="flex gap-3">
+<button class="px-6 py-2 rounded-lg border border-primary/30 text-primary font-bold text-sm hover:bg-primary/5 transition-all">Public Profile</button>
+<button class="px-6 py-2 rounded-lg bg-primary text-background-dark font-bold text-sm hover:brightness-110 transition-all shadow-lg shadow-primary/10">Upgrade Plan</button>
+</div>
+</header>
+<!-- Personal Info & Security Form -->
+<section class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<div class="lg:col-span-2 space-y-6">
+<div class="bg-background-light dark:bg-[#1a1a1a] p-6 rounded-xl border border-primary/5">
+<h2 class="text-xl font-bold mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">person_edit</span>
+                            Personal Information
+                        </h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="space-y-2">
+<label class="text-xs font-bold text-slate-400 uppercase tracking-widest">First Name</label>
+<input class="w-full bg-background-dark border border-primary/10 rounded-lg px-4 py-3 focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all" type="text" value="Alexander"/>
+</div>
+<div class="space-y-2">
+<label class="text-xs font-bold text-slate-400 uppercase tracking-widest">Last Name</label>
+<input class="w-full bg-background-dark border border-primary/10 rounded-lg px-4 py-3 focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all" type="text" value="Horologist"/>
+</div>
+<div class="space-y-2 md:col-span-2">
+<label class="text-xs font-bold text-slate-400 uppercase tracking-widest">Email Address</label>
+<input class="w-full bg-background-dark border border-primary/10 rounded-lg px-4 py-3 focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all" type="email" value="alexander.h@timecraft.luxury"/>
+</div>
+<div class="space-y-2">
+<label class="text-xs font-bold text-slate-400 uppercase tracking-widest">Phone Number</label>
+<input class="w-full bg-background-dark border border-primary/10 rounded-lg px-4 py-3 focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all" type="text" value="+1 (555) 012-3456"/>
+</div>
+<div class="space-y-2">
+<label class="text-xs font-bold text-slate-400 uppercase tracking-widest">Timezone</label>
+<select class="w-full bg-background-dark border border-primary/10 rounded-lg px-4 py-3 focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all text-slate-300">
+<option>London (GMT +0)</option>
+<option selected="">Geneva (GMT +1)</option>
+<option>New York (EST)</option>
+</select>
+</div>
+</div>
+<div class="mt-8 flex justify-end">
+<button class="px-8 py-3 bg-primary/10 text-primary border border-primary/20 rounded-lg font-bold hover:bg-primary/20 transition-all">Save Changes</button>
+</div>
+</div>
+</div>
+<!-- Subscription Overview -->
+<div class="space-y-6">
+<div class="bg-gradient-to-br from-primary/20 to-transparent p-6 rounded-xl border border-primary/30 relative overflow-hidden">
+<div class="absolute top-0 right-0 p-4 opacity-10">
+<span class="material-symbols-outlined text-8xl">verified_user</span>
+</div>
+<h2 class="text-xs font-bold text-primary uppercase tracking-widest mb-4">Current Subscription</h2>
+<p class="text-2xl font-extrabold text-white">Chronograph Tier</p>
+<div class="mt-4 space-y-2">
+<div class="flex justify-between text-sm">
+<span class="text-slate-400">Next Billing</span>
+<span class="font-bold">Nov 12, 2024</span>
+</div>
+<div class="flex justify-between text-sm">
+<span class="text-slate-400">Monthly Cost</span>
+<span class="font-bold">$49.00</span>
+</div>
+</div>
+<button class="w-full mt-6 py-2 bg-primary text-background-dark rounded-lg font-bold text-sm hover:brightness-110">Manage Subscription</button>
+</div>
+<!-- Collection Stats -->
+<div class="bg-[#1a1a1a] p-6 rounded-xl border border-primary/5">
+<h3 class="text-sm font-bold text-slate-400 uppercase tracking-widest mb-4">Collection Insights</h3>
+<div class="space-y-4">
+<div>
+<div class="flex justify-between text-xs mb-1">
+<span class="text-slate-500">Vault Capacity</span>
+<span class="text-primary font-bold">8 / 12</span>
+</div>
+<div class="w-full h-1.5 bg-background-dark rounded-full overflow-hidden">
+<div class="bg-primary h-full w-2/3"></div>
+</div>
+</div>
+<div class="flex items-center justify-between pt-2 border-t border-primary/5">
+<span class="text-xs text-slate-500">Estimated Value</span>
+<span class="text-lg font-bold text-white">$142,500</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Saved Addresses -->
+<section class="space-y-4">
+<div class="flex items-center justify-between">
+<h2 class="text-xl font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">local_shipping</span>
+                        Saved Addresses
+                    </h2>
+<button class="text-primary text-sm font-bold flex items-center gap-1 hover:underline">
+<span class="material-symbols-outlined text-base">add</span> Add New
+                    </button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="p-5 bg-[#1a1a1a] border border-primary/20 rounded-xl relative">
+<span class="absolute top-4 right-4 text-[10px] font-bold bg-primary text-background-dark px-2 py-0.5 rounded uppercase">Default</span>
+<p class="text-sm font-bold text-white mb-1">Primary Residence</p>
+<p class="text-sm text-slate-400 leading-relaxed">Rue du Rhône 12, 1204 Genève,<br/>Switzerland</p>
+<div class="mt-4 flex gap-4">
+<button class="text-xs font-bold text-primary hover:text-white transition-colors">Edit Address</button>
+<button class="text-xs font-bold text-slate-500 hover:text-red-400 transition-colors">Remove</button>
+</div>
+</div>
+<div class="p-5 bg-[#1a1a1a] border border-primary/5 rounded-xl hover:border-primary/20 transition-all">
+<p class="text-sm font-bold text-white mb-1">Office (Billing)</p>
+<p class="text-sm text-slate-400 leading-relaxed">27 Old Gloucester St, London<br/>WC1N 3AX, United Kingdom</p>
+<div class="mt-4 flex gap-4">
+<button class="text-xs font-bold text-primary hover:text-white transition-colors">Edit Address</button>
+<button class="text-xs font-bold text-slate-500 hover:text-red-400 transition-colors">Remove</button>
+</div>
+</div>
+</div>
+</section>
+<!-- My Purchased Watches Gallery -->
+<section class="space-y-6">
+<div class="flex items-center justify-between border-b border-primary/10 pb-4">
+<div>
+<h2 class="text-2xl font-bold">My Purchased Watches</h2>
+<p class="text-sm text-slate-400">A visual timeline of your horological journey</p>
+</div>
+<div class="flex gap-2">
+<button class="p-2 rounded bg-primary/5 text-primary border border-primary/10"><span class="material-symbols-outlined">grid_view</span></button>
+<button class="p-2 rounded bg-transparent text-slate-500 hover:text-primary"><span class="material-symbols-outlined">view_list</span></button>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Watch Card 1 -->
+<div class="group bg-[#1a1a1a] border border-primary/5 rounded-xl overflow-hidden hover:border-primary/40 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/5">
+<div class="h-64 bg-background-dark overflow-hidden relative">
+<div class="absolute top-4 left-4 z-10">
+<span class="px-2 py-1 bg-green-500/20 text-green-400 text-[10px] font-bold uppercase rounded border border-green-500/20">In Vault</span>
+</div>
+<div class="w-full h-full bg-cover bg-center group-hover:scale-110 transition-transform duration-700" data-alt="Close up of a luxury silver watch with a black face" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBgoqxt91KfHbOA020uPSECdd2_jtPAWhmIa7F1GHYPqKxWyMBeDLF8IfHpDSccu80kmUPrhA9KMYRxm4W4U5O2BNZJDCvLBsnrIUGOd12yCsarRdlsY-maty_gpM8eBZ0uOUFg7rV3Zxv78Jb2YG7C5PJNZXEskgc-rINce9p2kLCB864pORkqlEOYmeF4A_RMcYGwtkIA-2m-b9iy88354WQafG_1pNEtC2CIuj97kQmjCPQKOtu-Giu4nuE9aeSOB1JPIKCXxxYT')"></div>
+</div>
+<div class="p-5 space-y-3">
+<div>
+<h3 class="font-bold text-lg text-white group-hover:text-primary transition-colors">Royal Oak 'Jumbo'</h3>
+<p class="text-xs text-slate-500 uppercase font-bold tracking-widest">Audemars Piguet</p>
+</div>
+<div class="grid grid-cols-2 gap-2 pt-3 border-t border-primary/5">
+<div>
+<p class="text-[10px] text-slate-500 uppercase">Serial</p>
+<p class="text-xs font-mono font-bold">AP-15202-7721</p>
+</div>
+<div>
+<p class="text-[10px] text-slate-500 uppercase">Acquired</p>
+<p class="text-xs font-bold">Dec 2022</p>
+</div>
+</div>
+<div class="pt-2">
+<p class="text-[10px] text-slate-500 uppercase">Est. Value</p>
+<p class="text-sm font-bold text-primary">$72,400</p>
+</div>
+</div>
+</div>
+<!-- Watch Card 2 -->
+<div class="group bg-[#1a1a1a] border border-primary/5 rounded-xl overflow-hidden hover:border-primary/40 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/5">
+<div class="h-64 bg-background-dark overflow-hidden relative">
+<div class="absolute top-4 left-4 z-10">
+<span class="px-2 py-1 bg-yellow-500/20 text-yellow-400 text-[10px] font-bold uppercase rounded border border-yellow-500/20">Servicing</span>
+</div>
+<div class="w-full h-full bg-cover bg-center group-hover:scale-110 transition-transform duration-700" data-alt="Classic luxury chronometer with leather strap" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC5nU6zrAo9fOSTSwKmfMBYn0jB8ymlEeoWfnP1B-MT_StVxCwMf0xTuh9uEuWUy_1-Owwu6q9uX9-BxfrT8f23gaFOO5iKzfmyDyQpm9D-HtzYV_Lg4T4iZNyl6TazVN1aDLD5SKTSaORMMvUEAy2R5ClGie2pryx5CTqikd8wzddZfH50jYNSUkckaLqva1OY0iqZ_kG00ivuAl8ZXFaXq7p7m5ssuM1hpVqfFWq4g8dmRTsPY97ElWN7pqAL8N1S2Pw3TVROxspe')"></div>
+</div>
+<div class="p-5 space-y-3">
+<div>
+<h3 class="font-bold text-lg text-white group-hover:text-primary transition-colors">Nautilus 5711/1A</h3>
+<p class="text-xs text-slate-500 uppercase font-bold tracking-widest">Patek Philippe</p>
+</div>
+<div class="grid grid-cols-2 gap-2 pt-3 border-t border-primary/5">
+<div>
+<p class="text-[10px] text-slate-500 uppercase">Serial</p>
+<p class="text-xs font-mono font-bold">PP-5711-0982</p>
+</div>
+<div>
+<p class="text-[10px] text-slate-500 uppercase">Acquired</p>
+<p class="text-xs font-bold">Jun 2023</p>
+</div>
+</div>
+<div class="pt-2">
+<p class="text-[10px] text-slate-500 uppercase">Est. Value</p>
+<p class="text-sm font-bold text-primary">$118,900</p>
+</div>
+</div>
+</div>
+<!-- Watch Card 3 -->
+<div class="group bg-[#1a1a1a] border border-primary/5 rounded-xl overflow-hidden hover:border-primary/40 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/5">
+<div class="h-64 bg-background-dark overflow-hidden relative flex items-center justify-center">
+<div class="absolute inset-0 bg-primary/5 flex items-center justify-center border-b border-primary/10">
+<span class="material-symbols-outlined text-primary/30 text-7xl">watch</span>
+</div>
+<div class="z-10 text-center px-6">
+<p class="text-primary font-bold text-sm">Upcoming Acquisition</p>
+<p class="text-slate-500 text-xs mt-1">Order confirmed • Awaiting Shipment</p>
+</div>
+</div>
+<div class="p-5 space-y-3">
+<div>
+<h3 class="font-bold text-lg text-white">Submariner 'Starbucks'</h3>
+<p class="text-xs text-slate-500 uppercase font-bold tracking-widest">Rolex</p>
+</div>
+<div class="pt-4 flex justify-between items-center">
+<span class="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Status: Processing</span>
+<button class="text-primary text-xs font-bold hover:underline">View Details</button>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-8 flex justify-center">
+<button class="flex items-center gap-2 px-10 py-4 bg-background-dark border border-primary/30 text-primary font-bold rounded-xl hover:bg-primary/5 transition-all">
+                        Explore Full Collection Archive
+                        <span class="material-symbols-outlined">trending_flat</span>
+</button>
+</div>
+</section>
+</div>
+<!-- Footer -->
+<footer class="max-w-6xl mx-auto mt-20 pt-8 border-t border-primary/10 text-center text-slate-500 text-xs pb-10">
+<div class="flex flex-col md:flex-row justify-between items-center gap-4">
+<p>© 2024 TimeCraft Horology Group. All rights reserved.</p>
+<div class="flex gap-6">
+<a class="hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-primary transition-colors" href="#">Service Terms</a>
+<a class="hover:text-primary transition-colors" href="#">Vault Security Info</a>
+</div>
+</div>
+</footer>
+</main>
+</div>
+</body></html>

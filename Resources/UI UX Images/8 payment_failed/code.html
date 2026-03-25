@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Payment Declined | TimeCraft</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#e0ac29",
+                        "background-light": "#f8f7f6",
+                        "background-dark": "#0a0a0a",
+                        "card-dark": "#1a1a1a",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'WHT' 300, 'OPSZ' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #e0ac29 0%, #f9d98c 50%, #b8860b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gold-border-glow {
+            box-shadow: 0 0 20px rgba(224, 172, 41, 0.05);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
+<!-- Top Navigation Bar -->
+<header class="w-full px-6 py-6 flex items-center justify-between border-b border-white/5 bg-background-dark/50 backdrop-blur-md sticky top-0 z-50">
+<div class="flex items-center gap-3">
+<div class="size-8 flex items-center justify-center rounded bg-primary/10 border border-primary/20">
+<span class="material-symbols-outlined text-primary text-xl">schedule</span>
+</div>
+<h2 class="text-white text-xl font-extrabold tracking-tight">TimeCraft</h2>
+</div>
+<div class="flex items-center gap-6">
+<button class="text-slate-400 hover:text-white transition-colors text-sm font-medium">Dashboard</button>
+<div class="h-8 w-[1px] bg-white/10"></div>
+<div class="size-9 rounded-full bg-primary/20 border border-primary/30 flex items-center justify-center overflow-hidden">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="Professional user profile headshot avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgJekTLYXgUaLQFRnEZI3On8T9wAdIv63B_CGCksJ7ZqNcexN12o7sMDbg9DyZo3f-MwesCg8YvNz3Qhwq42xoC18uH0b3nKQuK3AuJajOtvUuT-XzeJyULGXOiGmqmkOQ4n0iIWOPZRsFhaQzKsENd4dvdrFxt0-8WFwKL5ppbB7TyKm4bM_dKFxztPOfbvbmJmQpClCY90mCBTjSmQpft1SWclpop6hoSx4GfBGN7f5G6g90LT4xAd5yRdXMgWLRNtQA-Y23IqSx"/>
+</div>
+</div>
+</header>
+<main class="flex-1 flex items-center justify-center p-6 relative overflow-hidden">
+<!-- Background Ambient Glow -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px] pointer-events-none"></div>
+<div class="max-w-[520px] w-full bg-card-dark border border-white/5 rounded-xl p-8 md:p-12 shadow-2xl gold-border-glow relative z-10 text-center">
+<!-- Elegant Gold Icon -->
+<div class="mb-8 flex justify-center">
+<div class="relative">
+<div class="absolute inset-0 bg-primary/20 blur-xl rounded-full"></div>
+<div class="size-20 rounded-full border border-primary/40 flex items-center justify-center bg-background-dark relative">
+<span class="material-symbols-outlined text-primary text-5xl font-light">close</span>
+</div>
+</div>
+</div>
+<!-- Content -->
+<div class="space-y-4 mb-10">
+<h1 class="text-3xl md:text-4xl font-extrabold text-white tracking-tight">
+                    Transaction <span class="gold-gradient-text">Declined</span>
+</h1>
+<p class="text-slate-400 text-lg leading-relaxed max-w-[360px] mx-auto">
+                    We couldn't process your payment. Please check your card details or try another method.
+                </p>
+</div>
+<!-- Action Buttons -->
+<div class="flex flex-col gap-4">
+<button class="w-full bg-primary hover:bg-primary/90 text-background-dark font-bold text-base py-4 rounded-lg transition-all active:scale-[0.98] shadow-lg shadow-primary/10">
+                    Retry Payment
+                </button>
+<a class="inline-flex items-center justify-center gap-2 text-slate-400 hover:text-primary transition-colors py-2 text-sm font-semibold group" href="#">
+<span class="material-symbols-outlined text-sm">support_agent</span>
+                    Need help? Contact Support
+                    <span class="block w-0 h-px bg-primary transition-all group-hover:w-full absolute bottom-0"></span>
+</a>
+</div>
+<!-- Common Solutions Drawer -->
+<div class="mt-12 pt-8 border-t border-white/5">
+<h3 class="text-white/40 text-xs font-bold uppercase tracking-widest mb-6">Common Solutions</h3>
+<div class="grid grid-cols-1 gap-3">
+<div class="flex items-center gap-3 p-3 rounded-lg bg-white/5 border border-white/5 text-left group hover:border-white/10 transition-colors">
+<span class="material-symbols-outlined text-primary/60 group-hover:text-primary transition-colors">credit_card</span>
+<span class="text-sm text-slate-400">Update card expiry or CVV</span>
+</div>
+<div class="flex items-center gap-3 p-3 rounded-lg bg-white/5 border border-white/5 text-left group hover:border-white/10 transition-colors">
+<span class="material-symbols-outlined text-primary/60 group-hover:text-primary transition-colors">account_balance</span>
+<span class="text-sm text-slate-400">Check available balance</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer Brand Mark -->
+<footer class="w-full py-8 px-6 text-center">
+<div class="flex flex-col items-center gap-2">
+<div class="flex items-center gap-2 opacity-30 grayscale contrast-125">
+<span class="material-symbols-outlined text-lg">schedule</span>
+<span class="text-sm font-bold tracking-tight">TIMECRAFT PREMIUM</span>
+</div>
+<p class="text-[10px] text-slate-600 uppercase tracking-[0.2em]">Secure Checkout © 2024</p>
+</div>
+</footer>
+</body></html>
