@@ -1,0 +1,113 @@
+/* ─────────────────────────────────────────────
+   GLOBAL DESIGN SYSTEM: TIMECRAFT PREMIUM
+   ───────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* Colors - Deep Dark Premium */
+  --tc-bg: #09090b;
+  --tc-bg-gradient: linear-gradient(145deg, #09090b 0%, #121215 100%);
+  --tc-surface: rgba(18, 18, 22, 0.6);
+  --tc-surface-hover: rgba(28, 28, 34, 0.8);
+  --tc-surface-2: rgba(30, 30, 36, 0.7);
+  --tc-border: rgba(255, 255, 255, 0.1);
+  --tc-border-glow: rgba(201, 168, 76, 0.3);
+  
+  /* Accents - Gold / Amber */
+  --tc-gold: #D4AF37;
+  --tc-gold-light: #F3E5AB;
+  --tc-gold-dark: #AA8C2C;
+  --tc-accent-glow: 0 0 20px rgba(212, 175, 55, 0.15);
+  
+  /* Text */
+  --tc-text: #F8F8F2;
+  --tc-text-muted: #A0A0A5;
+  --tc-text-dim: #707075;
+  
+  /* Typography */
+  --font-serif: 'Poppins', sans-serif;
+  --font-sans: 'Poppins', sans-serif;
+  
+  /* Spacing & Borders */
+  --tc-radius-sm: 4px;
+  --tc-radius: 8px;
+  --tc-radius-lg: 16px;
+  --tc-radius-xl: 24px;
+  --tc-transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --tc-transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --tc-transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+/* Base Normalize */
+html, body {
+  background: var(--tc-bg-gradient);
+  background-color: var(--tc-bg);
+  background-attachment: fixed;
+  color: var(--tc-text);
+  font-family: var(--font-sans) !important;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Page Wrapper for customized pages */
+.tc-page {
+  min-height: 100vh;
+}
+
+/* Protect Bootstrap Cards from global text color inversion */
+.card {
+  color: #212529 !important;
+  background-color: #fff !important;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif) !important;
+  font-weight: 600;
+  margin-top: 0;
+}
+
+/* Glassmorphism Utilities */
+.glass {
+  background: var(--tc-surface);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--tc-border);
+}
+
+.glass-panel {
+  background: var(--tc-surface);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--tc-border);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+/* Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--tc-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--tc-surface-2);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--tc-gold-dark);
+}
+
+/* Animations Variables */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

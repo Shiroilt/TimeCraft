@@ -68,6 +68,15 @@ function Product() {
   const navigate = useNavigate();
 
   const handleAddToCart = async (product_id, price, shipping_amount) => {
+    if (!userData?.user_id) {
+      Toast.fire({
+        icon: "info",
+        title: "Please login to add items to cart",
+      });
+      navigate("/login");
+      return;
+    }
+
     const formData = new FormData();
     formData.append("product_id", product_id);
     formData.append("shipping_amount", shipping_amount);

@@ -780,6 +780,15 @@ function ProductDetail() {
   };
 
   const handleAddToCart = async () => {
+    if (!userData?.user_id) {
+      Toast.fire({
+        icon: "info",
+        title: "Please login to add items to cart",
+      });
+      window.location.href = '/login'; // redirect to login page
+      return;
+    }
+
     try {
       const formData = new FormData();
       formData.append("product_id", product.id);

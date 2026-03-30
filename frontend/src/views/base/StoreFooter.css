@@ -1,0 +1,137 @@
+/* ─────────────────────────────────────────────
+   StoreFooter.css  –  TimeCraft Premium Dark
+   ───────────────────────────────────────────── */
+
+.tc-footer {
+  background: var(--tc-bg-gradient);
+  border-top: 1px solid var(--tc-border);
+  color: var(--tc-text-muted);
+  font-family: var(--font-sans);
+  padding-top: 60px;
+  position: relative;
+  overflow: hidden;
+}
+
+.tc-footer::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--tc-gold), transparent);
+  opacity: 0.5;
+}
+
+.tc-footer-container {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.tc-footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.tc-footer-social-text strong {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--tc-text);
+  letter-spacing: 0.05em;
+}
+
+.tc-footer-social-links {
+  display: flex;
+  gap: 12px;
+}
+
+.tc-social-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 14px;
+  text-decoration: none;
+  transition: all var(--tc-transition);
+}
+
+.tc-social-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+  color: #fff;
+}
+
+.tc-footer-content {
+  padding: 50px 0;
+}
+
+.tc-footer h6 {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  color: var(--tc-gold);
+  margin-bottom: 16px;
+  letter-spacing: 0.05em;
+}
+
+.tc-footer p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--tc-text-dim);
+}
+
+.tc-footer strong {
+  color: var(--tc-text);
+  font-size: 15px;
+  display: block;
+  margin-bottom: 20px;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+
+.tc-footer-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tc-footer-list li {
+  margin-bottom: 12px;
+}
+
+.tc-footer-list a {
+  color: var(--tc-text-muted);
+  text-decoration: none;
+  font-size: 14px;
+  transition: all var(--tc-transition);
+  display: inline-block;
+}
+
+.tc-footer-list a:hover {
+  color: var(--tc-gold);
+  transform: translateX(4px);
+}
+
+.tc-footer-bottom {
+  text-align: center;
+  padding: 24px;
+  background: rgba(0, 0, 0, 0.3);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  font-size: 13px;
+  color: var(--tc-text-dim);
+}
+
+.tc-footer-bottom a {
+  color: var(--tc-gold);
+  text-decoration: none;
+  transition: color var(--tc-transition);
+}
+
+.tc-footer-bottom a:hover {
+  color: var(--tc-gold-light);
+}
