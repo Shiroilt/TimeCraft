@@ -530,13 +530,6 @@ function StoreHeader() {
             <span className="tc-logo__text">TIMECRAFT</span>
           </Link>
 
-          {/* ── Nav Links (center) ── */}
-          <div className="tc-nav__links">
-            <Link to="/" className="tc-nav__link tc-nav__link--active">Shop</Link>
-            <Link to="/collections" className="tc-nav__link">Collections</Link>
-            <Link to="/our-story" className="tc-nav__link">Our Story</Link>
-          </div>
-
           {/* ── Search ── */}
           <form className="tc-search" onSubmit={handleSearchSubmit}>
             <i className="fas fa-search tc-search__icon" />

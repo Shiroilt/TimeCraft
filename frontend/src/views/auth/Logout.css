@@ -1,0 +1,229 @@
+/* ─────────────────────────────────────────────
+   Logout.css  –  TimeCraft Luxury Light Theme
+   ───────────────────────────────────────────── */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700;900&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@400;500;600;700&display=swap');
+
+:root {
+  --tc-bg:         #f5f2ee;
+  --tc-surface:    #ffffff;
+  --tc-border:     #e0d9d0;
+  --tc-gold:       #9a7b3a;
+  --tc-gold-light: #b8974a;
+  --tc-gold-dim:   #c9aa72;
+  --tc-text:       #1a1710;
+  --tc-text-muted: #8a8178;
+  --tc-text-dim:   #c4bdb5;
+  --tc-black:      #0f0e0b;
+  --tc-transition: 0.22s ease;
+}
+
+/* ── Page ── */
+.lo-page {
+  min-height: 100vh;
+  background: var(--tc-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Barlow', sans-serif;
+  padding: 40px 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Decorative grid lines */
+.lo-bg-lines {
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(0deg, transparent, transparent 60px, rgba(0,0,0,0.03) 60px, rgba(0,0,0,0.03) 61px),
+    repeating-linear-gradient(90deg, transparent, transparent 60px, rgba(0,0,0,0.03) 60px, rgba(0,0,0,0.03) 61px);
+  pointer-events: none;
+}
+
+/* ── Card ── */
+.lo-card {
+  position: relative;
+  z-index: 1;
+  background: var(--tc-surface);
+  border: 1px solid var(--tc-border);
+  padding: 56px 52px;
+  max-width: 480px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  animation: loFadeUp 0.5s ease both;
+}
+
+@keyframes loFadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Logo ── */
+.lo-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  margin-bottom: 36px;
+}
+
+.lo-logo__icon {
+  color: var(--tc-gold);
+  font-size: 20px;
+  line-height: 1;
+}
+
+.lo-logo__text {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  font-weight: 900;
+  letter-spacing: 0.22em;
+  color: var(--tc-black);
+  text-transform: uppercase;
+}
+
+/* ── Icon ── */
+.lo-icon-wrap {
+  width: 64px;
+  height: 64px;
+  border: 1px solid var(--tc-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 28px;
+  background: var(--tc-bg);
+}
+
+.lo-icon {
+  font-size: 22px;
+  color: var(--tc-gold);
+}
+
+/* ── Text ── */
+.lo-eyebrow {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--tc-gold);
+  margin-bottom: 12px;
+}
+
+.lo-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: var(--tc-black);
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  line-height: 1.08;
+  margin-bottom: 16px;
+}
+
+.lo-sub {
+  font-size: 13px;
+  line-height: 1.75;
+  color: var(--tc-text-muted);
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+/* ── Divider ── */
+.lo-divider {
+  width: 48px;
+  height: 1px;
+  background: var(--tc-gold);
+  opacity: 0.5;
+  margin: 28px auto;
+}
+
+/* ── Actions ── */
+.lo-actions {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.lo-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex: 1;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 14px 20px;
+  border-radius: 0;
+  transition: background var(--tc-transition), border-color var(--tc-transition), color var(--tc-transition);
+}
+
+.lo-btn--gold {
+  background: var(--tc-black);
+  color: #ffffff;
+  border: 1px solid var(--tc-black);
+}
+
+.lo-btn--gold:hover {
+  background: var(--tc-gold);
+  border-color: var(--tc-gold);
+  color: #ffffff;
+}
+
+.lo-btn--outline {
+  background: transparent;
+  color: var(--tc-text-muted);
+  border: 1px solid var(--tc-border);
+}
+
+.lo-btn--outline:hover {
+  border-color: var(--tc-gold);
+  color: var(--tc-gold);
+}
+
+/* ── Browse guest link ── */
+.lo-browse {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--tc-text-dim);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: color var(--tc-transition);
+}
+
+.lo-browse:hover {
+  color: var(--tc-text-muted);
+}
+
+.lo-browse i {
+  font-size: 9px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 480px) {
+  .lo-card {
+    padding: 40px 24px;
+  }
+
+  .lo-actions {
+    flex-direction: column;
+  }
+
+  .lo-title {
+    font-size: 1.8rem;
+  }
+}

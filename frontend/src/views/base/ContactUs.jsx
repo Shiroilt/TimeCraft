@@ -6,7 +6,7 @@ const ContactUs = () => {
     <div className="container my-5">
       {/* Hero Section */}
       <div className="text-center">
-        <h1 className="fw-bold">Contact Invitar</h1>
+        <h1 className="fw-bold">Contact TIMECRAFT</h1>
         <p className="text-muted">We're here to assist you 24/7! 🌟</p>
       </div>
 

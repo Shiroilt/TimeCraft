@@ -16,7 +16,7 @@ const FAQ = () => {
         <div className="accordion-item">
           <h2 className="accordion-header">
             <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
-               What is Invitar❓
+               What is TIMECRAFT❓
             </button>
           </h2>
           <div id="faq1" className="accordion-collapse collapse show" data-bs-parent="#faqAccordion">

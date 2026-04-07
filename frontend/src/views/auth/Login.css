@@ -1,0 +1,446 @@
+/* ─────────────────────────────────────────────
+   Login.css  –  TimeCraft Split-Screen Login
+   Luxury Light / Ivory Theme
+   ───────────────────────────────────────────── */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700;900&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@400;500;600;700&display=swap');
+
+/* ── Variables ── */
+:root {
+  --tc-bg:         #f5f2ee;
+  --tc-surface:    #ffffff;
+  --tc-border:     #e0d9d0;
+  --tc-gold:       #9a7b3a;
+  --tc-gold-light: #b8974a;
+  --tc-gold-dim:   #c9aa72;
+  --tc-text:       #1a1710;
+  --tc-text-muted: #8a8178;
+  --tc-text-dim:   #c4bdb5;
+  --tc-black:      #0f0e0b;
+  --tc-transition: 0.22s ease;
+}
+
+/* ── Page Layout ── */
+.lg-page {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+  font-family: 'Barlow', sans-serif;
+}
+
+/* ─────────────────────────────────────────────
+   LEFT PANEL — IMAGE
+   ───────────────────────────────────────────── */
+.lg-panel--image {
+  position: relative;
+  background:
+    linear-gradient(160deg, #0f0e0b 0%, #1a160e 60%, #0f0c06 100%);
+  display: flex;
+  align-items: stretch;
+  overflow: hidden;
+}
+
+/* Decorative watch-gear grid overlay */
+.lg-panel--image::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 30% 70%, rgba(154, 123, 58, 0.22) 0%, transparent 55%),
+    radial-gradient(circle at 80% 20%, rgba(154, 123, 58, 0.1) 0%, transparent 45%);
+}
+
+/* Fine line grid */
+.lg-panel--image::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(0deg, transparent, transparent 48px, rgba(255,255,255,0.03) 48px, rgba(255,255,255,0.03) 49px),
+    repeating-linear-gradient(90deg, transparent, transparent 48px, rgba(255,255,255,0.03) 48px, rgba(255,255,255,0.03) 49px);
+}
+
+.lg-panel__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.lg-panel__content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 48px;
+  width: 100%;
+}
+
+/* Logo */
+.lg-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.lg-logo__icon {
+  color: var(--tc-gold);
+  font-size: 22px;
+  line-height: 1;
+}
+
+.lg-logo__text {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 900;
+  letter-spacing: 0.22em;
+  color: #ffffff;
+  text-transform: uppercase;
+}
+
+.lg-logo--mobile {
+  display: none;
+  margin-bottom: 32px;
+}
+
+/* Eyebrow */
+.lg-eyebrow {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--tc-gold-dim);
+  margin-bottom: 14px;
+}
+
+/* Quote block */
+.lg-panel__quote {
+  display: flex;
+  flex-direction: column;
+}
+
+.lg-panel__heading {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-weight: 900;
+  color: #ffffff;
+  text-transform: uppercase;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  margin-bottom: 18px;
+}
+
+.lg-panel__sub {
+  font-size: 13px;
+  line-height: 1.8;
+  color: rgba(255,255,255,0.45);
+  max-width: 360px;
+  margin: 0;
+}
+
+/* Badges */
+.lg-panel__badges {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.lg-badge {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.03);
+  transition: border-color var(--tc-transition);
+}
+
+.lg-badge:hover {
+  border-color: rgba(154, 123, 58, 0.4);
+}
+
+.lg-badge i {
+  color: var(--tc-gold);
+  font-size: 13px;
+  width: 16px;
+}
+
+.lg-badge span {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+}
+
+/* ─────────────────────────────────────────────
+   RIGHT PANEL — FORM
+   ───────────────────────────────────────────── */
+.lg-panel--form {
+  background: var(--tc-surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px;
+  border-left: 1px solid var(--tc-border);
+}
+
+.lg-form-wrap {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+}
+
+.lg-form__title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.4rem;
+  font-weight: 900;
+  color: var(--tc-black);
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  line-height: 1;
+  margin-bottom: 10px;
+}
+
+.lg-form__sub {
+  font-size: 13px;
+  color: var(--tc-text-muted);
+  margin-bottom: 36px;
+  line-height: 1.6;
+}
+
+/* ── Form ── */
+.lg-form {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+/* Field */
+.lg-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.lg-label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.lg-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--tc-text-muted);
+}
+
+.lg-forgot {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--tc-gold);
+  text-decoration: none;
+  transition: color var(--tc-transition);
+}
+
+.lg-forgot:hover {
+  color: var(--tc-gold-light);
+}
+
+/* Input wrap */
+.lg-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.lg-input-icon {
+  position: absolute;
+  left: 16px;
+  color: var(--tc-text-dim);
+  font-size: 12px;
+  pointer-events: none;
+  transition: color var(--tc-transition);
+}
+
+.lg-input {
+  width: 100%;
+  background: var(--tc-bg);
+  border: 1px solid var(--tc-border);
+  border-radius: 0;
+  color: var(--tc-text);
+  font-family: 'Barlow', sans-serif;
+  font-size: 14px;
+  padding: 14px 16px 14px 42px;
+  outline: none;
+  transition: border-color var(--tc-transition), background var(--tc-transition);
+  letter-spacing: 0.01em;
+}
+
+.lg-input::placeholder {
+  color: var(--tc-text-dim);
+  font-style: italic;
+}
+
+.lg-input:focus {
+  border-color: var(--tc-gold);
+  background: var(--tc-surface);
+}
+
+.lg-input:focus + .lg-input-icon,
+.lg-input-wrap:focus-within .lg-input-icon {
+  color: var(--tc-gold);
+}
+
+/* Eye toggle */
+.lg-eye-btn {
+  position: absolute;
+  right: 14px;
+  background: transparent;
+  border: none;
+  color: var(--tc-text-dim);
+  font-size: 12px;
+  cursor: pointer;
+  padding: 4px;
+  transition: color var(--tc-transition);
+}
+
+.lg-eye-btn:hover {
+  color: var(--tc-text-muted);
+}
+
+/* Submit button */
+.lg-submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: var(--tc-black);
+  color: #ffffff;
+  border: none;
+  border-radius: 0;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  padding: 16px 32px;
+  cursor: pointer;
+  transition: background var(--tc-transition);
+  margin-top: 4px;
+}
+
+.lg-submit:hover:not(:disabled) {
+  background: var(--tc-gold);
+}
+
+.lg-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Divider */
+.lg-divider {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: var(--tc-text-dim);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+}
+
+.lg-divider::before,
+.lg-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--tc-border);
+}
+
+.lg-divider span {
+  font-family: 'Barlow Condensed', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--tc-text-dim);
+}
+
+/* Register link */
+.lg-register-text {
+  text-align: center;
+  font-size: 13px;
+  color: var(--tc-text-muted);
+  margin: 0;
+}
+
+.lg-register-link {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--tc-gold);
+  text-decoration: none;
+  transition: color var(--tc-transition);
+}
+
+.lg-register-link:hover {
+  color: var(--tc-gold-light);
+}
+
+/* ─────────────────────────────────────────────
+   RESPONSIVE
+   ───────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .lg-page {
+    grid-template-columns: 1fr;
+  }
+
+  .lg-panel--image {
+    display: none;
+  }
+
+  .lg-panel--form {
+    border-left: none;
+    padding: 40px 24px;
+    min-height: 100vh;
+    align-items: flex-start;
+    padding-top: 60px;
+  }
+
+  .lg-logo--mobile {
+    display: flex;
+  }
+
+  .lg-logo--mobile .lg-logo__text {
+    color: var(--tc-black);
+  }
+
+  .lg-logo--mobile .lg-logo__icon {
+    color: var(--tc-gold);
+  }
+
+  .lg-form-wrap {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .lg-panel--form {
+    padding: 40px 20px;
+  }
+
+  .lg-form__title {
+    font-size: 2rem;
+  }
+}

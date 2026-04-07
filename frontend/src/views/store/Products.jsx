@@ -128,40 +128,15 @@ function Product() {
     <>
       <div className="tc-page">
         <main>
-          {/* ── Category Strip ── */}
-          <div className="tc-category-strip">
-            {isLoadingCategories ? (
-              <p className="tc-loading">
-                Loading Collections&nbsp;
-                <i className="fas fa-spinner fa-spin" />
-              </p>
-            ) : (
-              <div className="tc-category-scroll">
-                {categories?.map((c) => (
-                  <div
-                    key={c.id}
-                    className="tc-category-item"
-                    onClick={() => filterCategory(c.title)}
-                  >
-                    <div className="tc-category-img-wrap">
-                      <img src={c.image} alt={c.title} />
-                    </div>
-                    <span>{c.title}</span>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-
-          {/* ── Section Heading ── */}
-          <div className="tc-section-header">
-            <p className="tc-eyebrow">Curated Selection</p>
-            <h2>Check Out Wide Range of Cards</h2>
-            <div className="tc-divider" />
-          </div>
-
-          {/* ── Product Grid ── */}
+          {/* ── Section Heading — Editorial style ── */}
           <div className="tc-container">
+            <div className="tc-section-header">
+              <p className="tc-eyebrow">Curated Selection</p>
+              <h2>Exceptional Pieces</h2>
+              <div className="tc-divider" />
+            </div>
+
+            {/* ── Product Grid ── */}
             {isLoadingProducts ? (
               <p className="tc-loading">
                 Loading Products&nbsp;
@@ -170,11 +145,18 @@ function Product() {
             ) : (
               <div className="tc-grid">
                 {products?.map((p, idx) => (
-                  <div key={p.id} className="tc-card" style={{ animationDelay: `${idx * 60}ms` }}>
-
+                  <div
+                    key={p.id}
+                    className="tc-card"
+                    style={{ animationDelay: `${idx * 80}ms` }}
+                  >
                     {/* Badge */}
-                    {p.featured && <span className="tc-badge tc-badge--best">BESTSELLER</span>}
-                    {p.new_arrival && <span className="tc-badge tc-badge--new">NEW ARRIVAL</span>}
+                    {p.featured && (
+                      <span className="tc-badge tc-badge--best">Certified Pre-Owned</span>
+                    )}
+                    {p.new_arrival && (
+                      <span className="tc-badge tc-badge--new">New Arrival</span>
+                    )}
 
                     {/* Image */}
                     <div className="tc-card__img-wrap">
@@ -200,10 +182,13 @@ function Product() {
                         <h3 className="tc-card__title">{p.title}</h3>
                       </Link>
 
-                      {/* Stars placeholder — replace with real rating if available */}
+                      {/* Stars */}
                       <div className="tc-card__stars">
-                        {[1,2,3,4,5].map(s => (
-                          <i key={s} className={`fas fa-star${s <= Math.round(p.rating || 4) ? "" : "-half-alt"}`} />
+                        {[1, 2, 3, 4, 5].map((s) => (
+                          <i
+                            key={s}
+                            className={`fas fa-star${s <= Math.round(p.rating || 4) ? "" : "-half-alt"}`}
+                          />
                         ))}
                         <span>({p.rating || "4.5"}/5)</span>
                       </div>
@@ -215,7 +200,9 @@ function Product() {
                           <span className="tc-card__old-price">₹{p.old_price}</span>
                         )}
                         {p.size?.length > 0 && (
-                          <span className="tc-card__meta">{p.size[0]?.name} · {p.category?.title}</span>
+                          <span className="tc-card__meta">
+                            {p.size[0]?.name} · {p.category?.title}
+                          </span>
                         )}
                       </div>
 
@@ -230,11 +217,17 @@ function Product() {
                             data-bs-auto-close="false"
                             aria-expanded="false"
                           >
-                            Variation
+                            <i className="fas fa-sliders-h" style={{ fontSize: '10px' }} />
+                            &nbsp;Select Options
                           </button>
-                          <ul className="dropdown-menu tc-dropdown" aria-labelledby={`dropdown-${p.id}`}>
+                          <ul
+                            className="dropdown-menu tc-dropdown"
+                            aria-labelledby={`dropdown-${p.id}`}
+                          >
                             <div className="d-flex flex-column">
-                              <li className="p-1"><b className="tc-var-label">Quantity:</b></li>
+                              <li className="p-1">
+                                <b className="tc-var-label">Quantity:</b>
+                              </li>
                               <div className="p-1 mt-0 pt-0 d-flex flex-wrap">
                                 <li>
                                   <input
@@ -249,16 +242,20 @@ function Product() {
                             </div>
 
                             {p.size?.length > 0 && (
-                              <div className="d-flex flex-column">
+                              <div className="d-flex flex-column mt-2">
                                 <li className="p-1">
                                   <b className="tc-var-label">Size:</b>
-                                  <span className="tc-var-selected">{selectedSizes[p.id] || "No Size"}</span>
+                                  <span className="tc-var-selected">
+                                    {selectedSizes[p.id] || "No Size"}
+                                  </span>
                                 </li>
                                 <div className="p-1 mt-0 pt-0 d-flex flex-wrap">
                                   {p.size?.map((size) => (
                                     <li key={size.name}>
                                       <button
-                                        onClick={(e) => handleSizeButtonClick(e, p.id, size.name)}
+                                        onClick={(e) =>
+                                          handleSizeButtonClick(e, p.id, size.name)
+                                        }
                                         className="tc-size-btn"
                                       >
                                         {size.name}
@@ -273,7 +270,9 @@ function Product() {
                               <div className="mt-3">
                                 <li className="p-1">
                                   <b className="tc-var-label">Color:</b>
-                                  <span className="tc-var-selected">{selectedColors[p.id] || "No Color"}</span>
+                                  <span className="tc-var-selected">
+                                    {selectedColors[p.id] || "No Color"}
+                                  </span>
                                 </li>
                                 <ul className="list-unstyled d-flex flex-wrap">
                                   {p.color?.map((color) => (
@@ -281,7 +280,9 @@ function Product() {
                                       <button
                                         className="tc-color-btn"
                                         style={{ backgroundColor: color.color_code }}
-                                        onClick={(e) => handleColorButtonClick(e, p.id, color.name)}
+                                        onClick={(e) =>
+                                          handleColorButtonClick(e, p.id, color.name)
+                                        }
                                         title={color.name}
                                       />
                                     </li>
@@ -294,9 +295,11 @@ function Product() {
                               <button
                                 type="button"
                                 className="tc-btn tc-btn--cart"
-                                onClick={() => handleAddToCart(p.id, p.price, p.shipping_amount)}
+                                onClick={() =>
+                                  handleAddToCart(p.id, p.price, p.shipping_amount)
+                                }
                               >
-                                <i className="fas fa-shopping-cart" /> Add to Cart
+                                <i className="fas fa-shopping-bag" /> Add to Cart
                               </button>
                               <button
                                 type="button"
