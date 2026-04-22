@@ -7,14 +7,15 @@
   
   /* Chatbot Toggle Button */
   .chatbot-toggle {
-    width: 90px;
-    height: auto;
-    border-radius: 25%;
+    width: auto;
+    padding: 10px 24px;
+    border-radius: 30px;
     background-color: black;
     border-color: gray;
     color: white;
     border: 3px solid gray; /* Solid border to prevent breaking */
-    font-size: auto;
+    font-size: 16px;
+    font-weight: 500;
     display: flex;
     align-items: center;
     justify-content: center;
