@@ -60,10 +60,35 @@ export const register = async (full_name, email, phone, password, password2) => 
         return{ data, error: null }
 
     } catch (error) {
+        let errorMessage = 'Something went wrong';
+        
+        if (error.response && error.response.data) {
+            const data = error.response.data;
+            // Check for specific field errors
+            if (data.detail) {
+                errorMessage = data.detail;
+            } else if (data.email) {
+                errorMessage = data.email[0];
+            } else if (data.phone) {
+                errorMessage = data.phone[0];
+            } else if (data.username) {
+                errorMessage = data.username[0];
+            } else if (data.non_field_errors) {
+                errorMessage = data.non_field_errors[0];
+            } else {
+                // Try to get the first available error message
+                const firstKey = Object.keys(data)[0];
+                if (firstKey && Array.isArray(data[firstKey])) {
+                    errorMessage = data[firstKey][0];
+                } else if (typeof data[firstKey] === 'string') {
+                    errorMessage = data[firstKey];
+                }
+            }
+        }
 
         return {
             data: null,
-            error: error.response.data?.detail || 'Something went wrong',
+            error: errorMessage,
         };
     }
 };

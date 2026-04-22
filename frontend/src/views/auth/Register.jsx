@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { register } from '../../utils/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../../store/auth';
+import Swal from 'sweetalert2';
 import './Register.css';
 
 function Register() {
@@ -30,7 +31,11 @@ function Register() {
         setIsLoading(true);
         const { error } = await register(fullname, email, phone, password, password2);
         if (error) {
-            alert(JSON.stringify(error));
+            Swal.fire({
+                icon: 'error',
+                title: 'Registration Error',
+                text: error,
+            });
         } else {
             navigate('/');
             resetForm();
