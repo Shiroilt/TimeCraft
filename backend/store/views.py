@@ -555,6 +555,45 @@ class RazorpayCheckoutView(generics.CreateAPIView):
         except Exception as e:
              return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+class RazorpayPaymentPageView(generics.GenericAPIView):
+    permission_classes = [AllowAny]
+    
+    def get(self, request, *args, **kwargs):
+        from django.shortcuts import render
+        order_oid = self.kwargs['order_oid']
+        try:
+            order = CartOrder.objects.get(oid=order_oid)
+        except CartOrder.DoesNotExist:
+            return Response({'error': 'Order not found'}, status=status.HTTP_404_NOT_FOUND)
+
+        client = razorpay.Client(auth=(settings.RAZORPAY_KEY_ID, settings.RAZORPAY_SECRET_KEY))
+        amount = int(order.total * 100) # amount in paisa
+        data = {
+            "amount": amount,
+            "currency": "INR",
+            "receipt": order.oid,
+            "payment_capture": "1",
+        }
+        
+        try:
+            razorpay_order = client.order.create(data=data)
+            
+            context = {
+                'key': settings.RAZORPAY_KEY_ID,
+                'amount': amount,
+                'currency': "INR",
+                'razorpay_order_id': razorpay_order['id'],
+                'order_oid': order.oid,
+                'full_name': order.full_name,
+                'email': order.email,
+                'mobile': order.mobile,
+                'frontend_url': settings.FRONTEND_URL
+            }
+            return render(request, 'payment.html', context)
+        except Exception as e:
+            from django.http import HttpResponseServerError
+            return HttpResponseServerError(f"<h3>Payment Initialization Failed</h3><p>{str(e)}</p>")
+
 class RazorpayPaymentVerifyView(generics.CreateAPIView):
     permission_classes = [AllowAny]
     
@@ -568,7 +607,7 @@ class RazorpayPaymentVerifyView(generics.CreateAPIView):
         if not all([razorpay_order_id, razorpay_payment_id, razorpay_signature, order_oid]):
              return Response({"error": "Missing data"}, status=status.HTTP_400_BAD_REQUEST)
 
-        client = razorpay.Client(auth=(settings.RAZORPAY_KEY_ID, settings.RAZORPAY_KEY_SECRET))
+        client = razorpay.Client(auth=(settings.RAZORPAY_KEY_ID, settings.RAZORPAY_SECRET_KEY))
 
         try:
             client.utility.verify_payment_signature({

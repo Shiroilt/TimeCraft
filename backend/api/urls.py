@@ -44,6 +44,7 @@ urlpatterns = [
     path('stripe-checkout/<order_oid>/', store_views.StripeCheckoutView.as_view()),
     path('payment-success/<order_oid>/', store_views.PaymentSuccessView.as_view()),
     path('razorpay-checkout/<order_oid>/', store_views.RazorpayCheckoutView.as_view()),
+    path('razorpay-pay-page/<order_oid>/', store_views.RazorpayPaymentPageView.as_view()),
     path('razorpay-payment-verify/', store_views.RazorpayPaymentVerifyView.as_view()),
     
     # Customer Endpoints

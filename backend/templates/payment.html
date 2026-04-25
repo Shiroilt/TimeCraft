@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>TimeCraft Payment</title>
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <style>
+    body { font-family: sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; background: #f8f9fa; }
+    h2 { color: #333; }
+    #loader { margin-top: 10px; font-style: italic; color: #666; }
+  </style>
+</head>
+<body>
+  <h2>Complete Your Payment for Order #{{ order_oid }}</h2>
+  <div id="loader">Launching Razorpay secure checkout...</div>
+  
+  <script>
+      var options = {
+          "key": "{{ key }}",
+          "amount": "{{ amount }}",
+          "currency": "{{ currency }}",
+          "order_id": "{{ razorpay_order_id }}",
+          "name": "TimeCraft",
+          "description": "Order Payment",
+          "prefill": {
+              "name": "{{ full_name }}",
+              "email": "{{ email }}",
+              "contact": "{{ mobile }}"
+          },
+          "handler": function (response){
+              document.getElementById('loader').innerText = "Verifying payment... Please don't close the page.";
+              
+              fetch("/api/v1/razorpay-payment-verify/", {
+                  method: 'POST',
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'X-CSRFToken': '{{ csrf_token }}' // if required
+                  },
+                  body: JSON.stringify({
+                      razorpay_order_id: response.razorpay_order_id,
+                      razorpay_payment_id: response.razorpay_payment_id,
+                      razorpay_signature: response.razorpay_signature,
+                      order_oid: "{{ order_oid }}"
+                  })
+              })
+              .then(res => res.json())
+              .then(data => {
+                  if(data.error) {
+                      alert("Payment verification failed: " + data.error);
+                      window.location.href = "{{ frontend_url }}";
+                  } else {
+                      window.location.href = "{{ frontend_url }}payment-success/{{ order_oid }}";
+                  }
+              })
+              .catch(err => {
+                  alert("Network error during verification.");
+                  window.location.href = "{{ frontend_url }}";
+              });
+          }
+      };
+      var rzp = new Razorpay(options);
+      rzp.on('payment.failed', function (response){
+           alert("Payment Failed: " + response.error.description);
+           window.location.href = "{{ frontend_url }}";
+      });
+      rzp.open();
+  </script>
+</body>
+</html>

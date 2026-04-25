@@ -57,92 +57,17 @@ function Checkout() {
         }
     };
     
-    const loadRazorpayScript = () => {
-        return new Promise((resolve) => {
-            const script = document.createElement("script");
-            script.src = "https://checkout.razorpay.com/v1/checkout.js";
-            script.onload = () => resolve(true);
-            script.onerror = () => resolve(false);
-            document.body.appendChild(script);
-        });
-    };
-
     const handleRazorpayPayment = async () => {
-        const res = await loadRazorpayScript();
-
-        if (!res) {
+        if (!order || !order.oid) {
             Swal.fire({
                 icon: 'error',
-                title: 'Razorpay SDK failed to load',
-                text: 'Are you online?',
+                title: 'Order Error',
+                text: 'Order ID is missing, please try again.',
             });
             return;
         }
-
-        try {
-            const response = await apiInstance.post(`razorpay-checkout/${order.oid}/`);
-            const data = response.data;
-            
-            if (data.error) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Payment Initialization Failed',
-                    text: data.error,
-                });
-                return;
-            }
-
-            const options = {
-                key: data.key_id, 
-                amount: data.amount,
-                currency: data.currency,
-                name: "TimeCraft",
-                description: "Order Payment",
-                order_id: data.razorpay_order_id,
-                handler: async function (response) {
-                    try {
-                        const verifyRes = await apiInstance.post('razorpay-payment-verify/', {
-                            razorpay_order_id: response.razorpay_order_id,
-                            razorpay_payment_id: response.razorpay_payment_id,
-                            razorpay_signature: response.razorpay_signature,
-                            order_oid: order.oid
-                        });
-                        
-                        if (verifyRes.data.error) {
-                            Swal.fire({ icon: 'error', title: 'Payment failed' });
-                        } else {
-                            // Navigate to success page
-                            Swal.fire({ icon: 'success', title: 'Payment Successful!' });
-                            window.location.href = `/payment-success/${order.oid}`;
-                        }
-                    } catch (error) {
-                        Swal.fire({ icon: 'error', title: 'Payment verification failed' });
-                    }
-                },
-                prefill: {
-                    name: data.full_name,
-                    email: data.email,
-                    contact: data.mobile
-                },
-                theme: {
-                    color: "#3399cc"
-                }
-            };
-            
-            const rzp = new window.Razorpay(options);
-            rzp.on('payment.failed', function (response){
-                 Swal.fire({ icon: 'error', title: 'Payment Failed', text: response.error.description });
-            });
-            rzp.open();
-
-        } catch (error) {
-            console.log(error);
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'Something went wrong with Razorpay setup!',
-            });
-        }
+        // Redirect to the newly created Django HTML payment page
+        window.location.href = `http://127.0.0.1:8000/api/v1/razorpay-pay-page/${order.oid}/`;
     };
 
     

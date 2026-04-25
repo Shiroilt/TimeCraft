@@ -173,8 +173,8 @@ STRIPE_PUBLIC_KEY = env("STRIPE_PUBLIC_KEY", default="")
 STRIPE_SECRETE_KEY = env("STRIPE_SECRETE_KEY", default="")
 
 # RAZORPAY
-RAZORPAY_KEY_ID = env("RAZORPAY_KEY_ID", default="rzp_test_placeholder_key_id")
-RAZORPAY_KEY_SECRET = env("RAZORPAY_KEY_SECRET", default="placeholder_secret")
+RAZORPAY_KEY_ID = env("RAZORPAY_KEY_ID", default="rzp_test_VQhEfe2NCXbbwI")
+RAZORPAY_SECRET_KEY = env("RAZORPAY_SECRET_KEY", default="2ibreCYL78DA3kjOhobCvz0f")
 
 ANYMAIL = {
     "MAILGUN_API_KEY": os.environ.get("MAILGUN_API_KEY"),
@@ -268,3 +268,4 @@ CELERY_ACCEPT_CONTENT = ["json"]
 CELERY_TASK_SERIALIZER = "json"
 
 TOGETHER_API_KEY = "aa040f50749ff637fe882040c40356a150a6d8bb0a74aac5dfbe895d13212658"
+# End of settings
