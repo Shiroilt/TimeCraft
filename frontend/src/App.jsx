@@ -9,12 +9,12 @@ import ForgotPassword from './views/auth/ForgotPassword'; // Import the 'ForgotP
 import CreatePassword from './views/auth/CreatePassword';
 import StoreHeader from "./views/base/StoreHeader";
 import StoreFooter from "./views/base/StoreFooter";
-import AboutUs from "./views/base/AboutUs"; {/* chnage by y */}
-import ContactUs from "./views/base/ContactUs"; {/* chnage by y */}
-import FAQ from "./views/base/FAQ"; {/* chnage by y */}
-import TermsCondition from "./views/base/TermsCondition"; {/* chnage by y */}
+import AboutUs from "./views/base/AboutUs"; {/* chnage by y */ }
+import ContactUs from "./views/base/ContactUs"; {/* chnage by y */ }
+import FAQ from "./views/base/FAQ"; {/* chnage by y */ }
+import TermsCondition from "./views/base/TermsCondition"; {/* chnage by y */ }
 import Products from "./views/store/Products";
-import Categories from "./views/store/Categories"; {/* chnage by y */}
+import Categories from "./views/store/Categories"; {/* chnage by y */ }
 import ProductDetail from "./views/store/ProductDetail";
 import Cart from "./views/store/Cart";
 import Checkout from "./views/store/Checkout";
@@ -50,6 +50,7 @@ import AddProduct from './views/vendor/AddProduct';
 import UpdateProduct from './views/vendor/UpdateProduct';
 import Chatbot from './views/base/chatbot';
 import TrackSys from './views/customer/Tracksys';
+import Subscription from './views/store/Subscription';
 function App() {
   const [count, setCount] = useState(0)
   const [cartCount, setCartCount] = useState()
@@ -67,75 +68,76 @@ function App() {
 
   return (
     <CartContext.Provider value={[cartCount, setCartCount]}>
-    <BrowserRouter>
-    <ScrollToTop />
-    <StoreHeader/>
-    <MainWrapper>
-      {/* Advertisement Popup */}
-      <AdvertisementPopup />
-      <Routes>
-        <Route path='/login' element={<Login />} />
-        <Route path='/register' element={<Register />} />
-        <Route path='/logout' element={<Logout />} />
-        <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/create-new-password" element={<CreatePassword />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        
+      <BrowserRouter>
+        <ScrollToTop />
+        <StoreHeader />
+        <MainWrapper>
+          {/* Advertisement Popup */}
+          <AdvertisementPopup />
+          <Routes>
+            <Route path='/login' element={<Login />} />
+            <Route path='/register' element={<Register />} />
+            <Route path='/logout' element={<Logout />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/create-new-password" element={<CreatePassword />} />
+            <Route path="/dashboard" element={<Dashboard />} />
 
-        {/* STORE COMPONENTS */}
-        <Route path='/' element={<Products />} />
-        <Route path='/detail/:slug/' element={<ProductDetail />} />
-        <Route path='/cart/' element={<Cart />} />
-        <Route path='/checkout/:order_oid/' element={<Checkout />} />
-        <Route path='/payment-success/:order_oid/' element={<PaymentSuccess />} />
-        <Route path="/search" element={<Search />} />
-        {/* chnage by y */}
-        <Route path="/" element={<Categories />} />
-        <Route path="/products" element={<Products />} /> {/* Product Page Route */}
 
-        {/* Customer Routs */}
-        <Route path="/customer/account/" element={<PrivateRoute><Account /></PrivateRoute>} />
-        <Route path="/customer/orders/" element={<PrivateRoute><Orders /></PrivateRoute>} />
-        <Route path="/customer/orders/:order_oid/" element={<PrivateRoute><OrderDetail /></PrivateRoute>} />
-        <Route path="/customer/wishlist/" element={<PrivateRoute><Wishlist /></PrivateRoute>} />
-        <Route path="/customer/notifications/" element={<PrivateRoute><CustomerNotification /></PrivateRoute>} />
-        <Route path="/customer/settings/" element={<PrivateRoute><CustomerSettings /></PrivateRoute>} />
-        <Route path="/customer/invoice/:order_oid/" element={<PrivateRoute><Invoice /></PrivateRoute>} />
-        <Route path="/tracksys/:user_id/:order_oid" element={<TrackSys />} />
-        {/* Vendor Routs */}
-        <Route path="/vendor/dashboard/" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
-        <Route path="/vendor/products/" element={<PrivateRoute><Product /></PrivateRoute>} />
-        <Route path="/vendor/orders/" element={<PrivateRoute><VendorOrders /></PrivateRoute>} />
-        <Route path="/vendor/orders/:order_oid/" element={<PrivateRoute><VendorOrderDetail /></PrivateRoute>} />
-        <Route path="/vendor/earning/" element={<PrivateRoute><Earning /></PrivateRoute>} />
-        <Route path="/vendor/reviews/" element={<PrivateRoute><Reviews /></PrivateRoute>} />
-        <Route path="/vendor/reviews/:review_id/" element={<PrivateRoute><ReviewDetail /></PrivateRoute>} />
-        <Route path="/vendor/coupon/" element={<PrivateRoute><Coupon /></PrivateRoute>} />
-        <Route path="/vendor/coupon/:coupon_id/" element={<PrivateRoute><EditCoupon /></PrivateRoute>} />
-        <Route path="/vendor/notifications/" element={<PrivateRoute><Notification /></PrivateRoute>} />
-        <Route path="/vendor/settings/" element={<PrivateRoute><VendorSettings /></PrivateRoute>} />
-        <Route path="/vendor/:slug/" element={<PrivateRoute><Shop /></PrivateRoute>} />
-        <Route path="/vendor/add-product/" element={<PrivateRoute><AddProduct /></PrivateRoute>} />
-        <Route path="/vendor/product/update/:pid/" element={<PrivateRoute><UpdateProduct /></PrivateRoute>} />
-        
+            {/* STORE COMPONENTS */}
+            <Route path='/' element={<Products />} />
+            <Route path='/detail/:slug/' element={<ProductDetail />} />
+            <Route path='/cart/' element={<Cart />} />
+            <Route path='/checkout/:order_oid/' element={<Checkout />} />
+            <Route path='/payment-success/:order_oid/' element={<PaymentSuccess />} />
+            <Route path="/search" element={<Search />} />
+            {/* chnage by y */}
+            <Route path="/" element={<Categories />} />
+            <Route path="/products" element={<Products />} /> {/* Product Page Route */}
 
-        {/* footer -> support links*/}
-        <Route path='/views/base/AboutUs' element={<AboutUs />} />
-        <Route path='/views/base/ContactUs' element={<ContactUs />} />
-        <Route path='/views/base/FAQ' element={<FAQ />} />
-        <Route path='/views/base/TermsCondition' element={<TermsCondition />} />
+            {/* Customer Routs */}
+            <Route path="/customer/account/" element={<PrivateRoute><Account /></PrivateRoute>} />
+            <Route path="/customer/orders/" element={<PrivateRoute><Orders /></PrivateRoute>} />
+            <Route path="/customer/orders/:order_oid/" element={<PrivateRoute><OrderDetail /></PrivateRoute>} />
+            <Route path="/customer/wishlist/" element={<PrivateRoute><Wishlist /></PrivateRoute>} />
+            <Route path="/customer/notifications/" element={<PrivateRoute><CustomerNotification /></PrivateRoute>} />
+            <Route path="/customer/settings/" element={<PrivateRoute><CustomerSettings /></PrivateRoute>} />
+            <Route path="/customer/invoice/:order_oid/" element={<PrivateRoute><Invoice /></PrivateRoute>} />
+            <Route path="/tracksys/:user_id/:order_oid" element={<TrackSys />} />
+            <Route path="/subscription" element={<Subscription />} />
+            {/* Vendor Routs */}
+            <Route path="/vendor/dashboard/" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
+            <Route path="/vendor/products/" element={<PrivateRoute><Product /></PrivateRoute>} />
+            <Route path="/vendor/orders/" element={<PrivateRoute><VendorOrders /></PrivateRoute>} />
+            <Route path="/vendor/orders/:order_oid/" element={<PrivateRoute><VendorOrderDetail /></PrivateRoute>} />
+            <Route path="/vendor/earning/" element={<PrivateRoute><Earning /></PrivateRoute>} />
+            <Route path="/vendor/reviews/" element={<PrivateRoute><Reviews /></PrivateRoute>} />
+            <Route path="/vendor/reviews/:review_id/" element={<PrivateRoute><ReviewDetail /></PrivateRoute>} />
+            <Route path="/vendor/coupon/" element={<PrivateRoute><Coupon /></PrivateRoute>} />
+            <Route path="/vendor/coupon/:coupon_id/" element={<PrivateRoute><EditCoupon /></PrivateRoute>} />
+            <Route path="/vendor/notifications/" element={<PrivateRoute><Notification /></PrivateRoute>} />
+            <Route path="/vendor/settings/" element={<PrivateRoute><VendorSettings /></PrivateRoute>} />
+            <Route path="/vendor/:slug/" element={<PrivateRoute><Shop /></PrivateRoute>} />
+            <Route path="/vendor/add-product/" element={<PrivateRoute><AddProduct /></PrivateRoute>} />
+            <Route path="/vendor/product/update/:pid/" element={<PrivateRoute><UpdateProduct /></PrivateRoute>} />
 
-        {/*Add this route inside <Routes> */}
-        <Route path="/password-change" element={<CreatePassword />} />
 
-        {/* Chatbot Route
+            {/* footer -> support links*/}
+            <Route path='/views/base/AboutUs' element={<AboutUs />} />
+            <Route path='/views/base/ContactUs' element={<ContactUs />} />
+            <Route path='/views/base/FAQ' element={<FAQ />} />
+            <Route path='/views/base/TermsCondition' element={<TermsCondition />} />
+
+            {/*Add this route inside <Routes> */}
+            <Route path="/password-change" element={<CreatePassword />} />
+
+            {/* Chatbot Route
         <Route path="/chatbot" element={<Chatbot />} /> */}
-        
-      </Routes>
-      </MainWrapper>
-      <Chatbot/>
-      <StoreFooter/>
-    </BrowserRouter>
+
+          </Routes>
+        </MainWrapper>
+        <Chatbot />
+        <StoreFooter />
+      </BrowserRouter>
     </CartContext.Provider>
   )
 }

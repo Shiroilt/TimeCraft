@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'userauths',
     'vendor',
     'customer',
+    'subscription',
     'api',
     "advertisement",
     'chatbot',

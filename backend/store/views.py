@@ -19,6 +19,10 @@ from django.core.mail import send_mail
 from rest_framework.response import Response
 from .models import CartOrder, Cart
 
+# SUBSCRIPTION DISCOUNT
+from subscription.models import get_active_subscription
+# END SUBSCRIPTION DISCOUNT
+
 stripe.api_key = settings.STRIPE_SECRETE_KEY
 
 def send_notification(user=None, vendor=None, order=None, order_item=None):
@@ -46,6 +50,11 @@ class ProductListAPIView(generics.ListAPIView):
             return ProductWriteSerializer
         return ProductSerializer
 
+    def get_serializer_context(self):
+        context = super().get_serializer_context()
+        context['request'] = self.request
+        return context
+
 class ProductDetailAPIView(generics.RetrieveAPIView):
     serializer_class = ProductSerializer
     permission_classes = [AllowAny]
@@ -53,6 +62,11 @@ class ProductDetailAPIView(generics.RetrieveAPIView):
     def get_object(self):
         slug = self.kwargs['slug']
         return Product.objects.get(slug=slug)
+
+    def get_serializer_context(self):
+        context = super().get_serializer_context()
+        context['request'] = self.request
+        return context
     
 class CartAPIView(generics.ListCreateAPIView):
     queryset = Cart.objects.all()
@@ -255,6 +269,21 @@ class CreateOrderAPIView(generics.CreateAPIView):
 
         cart_items = Cart.objects.filter(cart_id=cart_id)
         vendor = cart_items.first().product.vendor if cart_items.exists() else None
+
+        # SUBSCRIPTION DISCOUNT
+        initial_total_before_discount = sum(item.total for item in cart_items)
+        active_sub = get_active_subscription(request.user) if request.user and request.user.is_authenticated else None
+
+        if active_sub:
+            product_discount = active_sub.plan.product_discount_percent / Decimal('100')
+            service_discount = active_sub.plan.service_discount_percent / Decimal('100')
+            for item in cart_items:
+                discounted_price = item.price * (Decimal('1') - product_discount)
+                item.sub_total = discounted_price * item.qty
+                item.service_fee = item.service_fee * (Decimal('1') - service_discount)
+                item.total = item.sub_total + item.shipping_amount + item.service_fee + item.tax_fee
+                item.save()
+        # END SUBSCRIPTION DISCOUNT
         with transaction.atomic():
             order = CartOrder.objects.create(
                 buyer=user,
@@ -305,8 +334,13 @@ class CreateOrderAPIView(generics.CreateAPIView):
             order.shipping_amount = total_shipping
             order.tax_fee = total_tax
             order.service_fee = total_service_fee
-            order.initial_total = total_initial_total
+            order.initial_total = initial_total_before_discount
             order.total = total_total
+            
+            # SUBSCRIPTION DISCOUNT
+            if not hasattr(order, 'subscription_discount_percent'):
+                order.saved = (order.saved or Decimal('0.0')) + (order.initial_total - order.total)
+            # END SUBSCRIPTION DISCOUNT
             
             order.save()
            

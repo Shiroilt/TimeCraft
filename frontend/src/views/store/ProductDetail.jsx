@@ -708,6 +708,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import apiInstance from "../../utils/axios";
+import useAxios from "../../utils/useAxios";
 import GetCurrentAddress from "../plugin/UserCountry";
 import UserData from "../plugin/UserData";
 import CartID from "../plugin/CardID";
@@ -742,6 +743,7 @@ function ProductDetail() {
   const currentAddress = GetCurrentAddress();
   const userData = UserData();
   const cartID = CartID();
+  const axiosInstance = useAxios();
 
   const Toast = Swal.mixin({
     toast: true,
@@ -752,13 +754,24 @@ function ProductDetail() {
   });
 
   useEffect(() => {
-    apiInstance.get(`/products/${param.slug}`).then((res) => {
-      setProduct(res.data);
-      setSpecifications(res.data.specification);
-      setGallery(res.data.gallery);
-      setColors(res.data.color);
-      setSizes(res.data.size);
-    });
+    const fetchProduct = async () => {
+      try {
+        const res = await axiosInstance.get(`/products/${param.slug}`);
+        setProduct(res.data);
+        setSpecifications(res.data.specification);
+        setGallery(res.data.gallery);
+        setColors(res.data.color);
+        setSizes(res.data.size);
+      } catch {
+        const res = await apiInstance.get(`/products/${param.slug}`);
+        setProduct(res.data);
+        setSpecifications(res.data.specification);
+        setGallery(res.data.gallery);
+        setColors(res.data.color);
+        setSizes(res.data.size);
+      }
+    };
+    fetchProduct();
   }, [param.slug]);
 
   const handleColorButtonClick = (event) => {
@@ -930,8 +943,26 @@ function ProductDetail() {
                 </ul>
               </div>
               <h5 className="mb-3">
-                <s className="text-muted me-2 small align-middle">₹{product.old_price}</s>
-                <span className="align-middle" style={{ color: '#28a745' }}>₹{product.price}</span>
+                {product.discounted_price ? (
+                  <>
+                    <s className="text-muted me-2 small align-middle">₹{product.price}</s>
+                    <span className="align-middle fw-bold" style={{ color: '#28a745', fontSize:'1.2rem' }}>
+                      ₹{product.discounted_price}
+                    </span>
+                    <span className="ms-2 badge" style={{
+                      background:'#d4edda', color:'#155724', fontWeight:'600', fontSize:'0.75rem'
+                    }}>
+                      {product.discount_label}
+                    </span>
+                  </>
+                ) : (
+                  <>
+                    {product.old_price > 0 && product.old_price !== product.price && (
+                      <s className="text-muted me-2 small align-middle">₹{product.old_price}</s>
+                    )}
+                    <span className="align-middle" style={{ color: '#28a745' }}>₹{product.price}</span>
+                  </>
+                )}
               </h5>
               <p className="text-muted">{product.description}</p>
               <div className="table-responsive">
