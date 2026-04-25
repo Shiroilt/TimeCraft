@@ -6,6 +6,7 @@ from customer import views as customer_views
 from vendor import views as vendor_views
 from advertisement import views as advertisement_views
 from chatbot import views as chatbot_views
+from subscription import views as subscription_views
 
 from rest_framework_simplejwt.views import TokenRefreshView
 
@@ -83,6 +84,8 @@ urlpatterns = [
     path("advertisement/create/", advertisement_views.CreateAdvertisementView.as_view(), name="create_ad"),
     path("advertisement/manage/<int:pk>/", advertisement_views.ManageAdvertisementView.as_view(), name="manage_ad"),
     path("advertisement/active/", advertisement_views.ActiveAdvertisementsView.as_view(), name="active_ads"),
+
+    path('subscription/', include('subscription.urls')),
 
     # chatbot
     path('send-message/', chatbot_views.send_message, name='send_message'),

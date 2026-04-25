@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import apiInstance from "../../utils/axios";
+import useAxios from '../../utils/useAxios';
 import { Link, useNavigate } from "react-router-dom";
 import GetCurrentAddress from "../plugin/UserCountry";
 import UserData from "../plugin/UserData";
@@ -25,12 +26,21 @@ function Product() {
   const [cartCount, setCartCount] = useContext(CartContext);
   const [isLoadingProducts, setIsLoadingProducts] = useState(true);
   const [isLoadingCategories, setIsLoadingCategories] = useState(true);
+  const axiosInstance = useAxios();
 
   useEffect(() => {
-    apiInstance.get("/products").then((response) => {
-      setProducts(response.data);
+    const fetchProducts = async () => {
+      try {
+        const response = await axiosInstance.get('products/');
+        setProducts(response.data);
+      } catch {
+        // fallback to public apiInstance if not logged in
+        const response = await apiInstance.get('products/');
+        setProducts(response.data);
+      }
       setIsLoadingProducts(false);
-    });
+    };
+    fetchProducts();
   }, []);
 
   useEffect(() => {
@@ -195,9 +205,26 @@ function Product() {
 
                       {/* Price row */}
                       <div className="tc-card__price-row">
-                        <span className="tc-card__price">₹{p.price}</span>
-                        {p.old_price && (
-                          <span className="tc-card__old-price">₹{p.old_price}</span>
+                        {p.discounted_price ? (
+                          <>
+                            <span className="tc-card__price" style={{color:'#28a745'}}>
+                              ₹{p.discounted_price}
+                            </span>
+                            <span className="tc-card__old-price">₹{p.price}</span>
+                            <span style={{
+                              fontSize:'0.65rem', background:'#d4edda', color:'#155724',
+                              borderRadius:'4px', padding:'1px 5px', fontWeight:'600'
+                            }}>
+                              {p.discount_label}
+                            </span>
+                          </>
+                        ) : (
+                          <>
+                            <span className="tc-card__price">₹{p.price}</span>
+                            {p.old_price > 0 && p.old_price !== p.price && (
+                              <span className="tc-card__old-price">₹{p.old_price}</span>
+                            )}
+                          </>
                         )}
                         {p.size?.length > 0 && (
                           <span className="tc-card__meta">

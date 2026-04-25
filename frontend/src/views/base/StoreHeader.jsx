@@ -412,7 +412,7 @@
 //               </ul>
 //             ) : null}
 //             </div>
-           
+
 //               {/* Cart Button */}
 //               {profile?.role !== "vendor" && (
 //                 <div className="mx-2">
@@ -597,6 +597,7 @@ function StoreHeader() {
                 </button>
                 <ul className="dropdown-menu tc-dropdown dropdown-menu-end">
                   <li><Link className="tc-dropdown__item" to="/customer/account/"><i className="fas fa-user" /> Profile</Link></li>
+                  <li><Link className="tc-dropdown__item" to="/subscription"><i className="fas fa-crown" /> Membership</Link></li>
                   <li><Link className="tc-dropdown__item" to="/customer/orders/"><i className="fas fa-box" /> Orders</Link></li>
                   <li><Link className="tc-dropdown__item" to="/customer/wishlist/"><i className="fas fa-heart" /> Wishlist</Link></li>
                   <li><Link className="tc-dropdown__item" to="/customer/notifications/"><i className="fas fa-bell" /> Notifications</Link></li>

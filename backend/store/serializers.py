@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from vendor.models import Vendor
 from userauths.serializer import ProfileSerializer
-
+from subscription.models import get_active_subscription
 
 
 from store.models import (
@@ -77,6 +77,8 @@ class ProductSerializer(serializers.ModelSerializer):
     color = ColorSerializer(many=True, read_only=True)
     size = SizeSerializer(many=True, read_only=True)
     specification = SpecificationSerializer(many=True, read_only=True)
+    discounted_price = serializers.SerializerMethodField()
+    discount_label = serializers.SerializerMethodField()
 
     class Meta:
         model = Product
@@ -106,6 +108,8 @@ class ProductSerializer(serializers.ModelSerializer):
             "product_rating",
             "rating_count",
             "orders",
+            "discounted_price",
+            "discount_label",
         ]
     
     def __init__(self, *args, **kwargs):
@@ -115,6 +119,27 @@ class ProductSerializer(serializers.ModelSerializer):
             self.Meta.depth = 0
         else:
             self.Meta.depth = 3
+
+    def get_discounted_price(self, obj):
+        request = self.context.get('request')
+        if not request or not request.user.is_authenticated:
+            return None
+        sub = get_active_subscription(request.user)
+        if not sub:
+            return None
+        from decimal import Decimal
+        discount = sub.plan.product_discount_percent / Decimal('100')
+        discounted = obj.price * (1 - discount)
+        return round(discounted, 2)
+
+    def get_discount_label(self, obj):
+        request = self.context.get('request')
+        if not request or not request.user.is_authenticated:
+            return None
+        sub = get_active_subscription(request.user)
+        if not sub:
+            return None
+        return f"{sub.plan.product_discount_percent}% {sub.plan.name} discount"
 
 class ProductWriteSerializer(serializers.ModelSerializer):
     specifications = SpecificationSerializer(many=True, write_only=True, required=False)
