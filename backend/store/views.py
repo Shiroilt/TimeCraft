@@ -11,7 +11,7 @@ from userauths.models import User
 from store.models import Cart, CartOrderItem, Notification, Product, Category, CartOrder, Gallery, ProductFaq, Review,  Specification, Coupon, Color, Size, Tax, Wishlist, Vendor
 from decimal import Decimal
 import stripe # type: ignore
-
+import razorpay
 from rest_framework import generics, status
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
@@ -475,3 +475,93 @@ class SearchProductAPIView(generics.ListAPIView):
             (Q(title__icontains=query) | Q(description__icontains=query) | Q(category__title__icontains=query))
         )
         return products
+
+class RazorpayCheckoutView(generics.CreateAPIView):
+    serializer_class = CartOrderSerializer
+    queryset = CartOrder.objects.all()
+    permission_classes = [AllowAny]
+
+    def create(self, request, *args, **kwargs):
+        order_oid = self.kwargs['order_oid']
+        try:
+            order = CartOrder.objects.get(oid=order_oid)
+        except CartOrder.DoesNotExist:
+            return Response({'error': 'Order not found'}, status=status.HTTP_404_NOT_FOUND)
+
+        # Initialize Razorpay client
+        client = razorpay.Client(auth=(settings.RAZORPAY_KEY_ID, settings.RAZORPAY_KEY_SECRET))
+
+        # Create Razorpay order
+        amount = int(order.total * 100) # amount in paisa
+        data = {
+            "amount": amount,
+            "currency": "INR",
+            "receipt": order.oid,
+        }
+        
+        try:
+            razorpay_order = client.order.create(data=data)
+            
+            # Save the Razorpay order id securely if you have a field for it, 
+            # otherwise it can just be kept on frontend.
+            
+            return Response({
+                'razorpay_order_id': razorpay_order['id'],
+                'amount': amount,
+                'currency': "INR",
+                'key_id': settings.RAZORPAY_KEY_ID,
+                'order_oid': order.oid,
+                'full_name': order.full_name,
+                'email': order.email,
+                'mobile': order.mobile,
+            }, status=status.HTTP_200_OK)
+            
+        except razorpay.errors.SignatureVerificationError as e:
+            return Response({'error': 'Razorpay error'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        except Exception as e:
+             return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+class RazorpayPaymentVerifyView(generics.CreateAPIView):
+    permission_classes = [AllowAny]
+    
+    def create(self, request, *args, **kwargs):
+        payload = request.data
+        razorpay_order_id = payload.get('razorpay_order_id')
+        razorpay_payment_id = payload.get('razorpay_payment_id')
+        razorpay_signature = payload.get('razorpay_signature')
+        order_oid = payload.get('order_oid')
+
+        if not all([razorpay_order_id, razorpay_payment_id, razorpay_signature, order_oid]):
+             return Response({"error": "Missing data"}, status=status.HTTP_400_BAD_REQUEST)
+
+        client = razorpay.Client(auth=(settings.RAZORPAY_KEY_ID, settings.RAZORPAY_KEY_SECRET))
+
+        try:
+            client.utility.verify_payment_signature({
+                'razorpay_order_id': razorpay_order_id,
+                'razorpay_payment_id': razorpay_payment_id,
+                'razorpay_signature': razorpay_signature
+            })
+            
+            order = CartOrder.objects.get(oid=order_oid)
+            
+            if order.payment_status == "pending":
+                order.payment_status = "paid"
+                order.save()
+                
+                # Delete carts after payment
+                cart_id = order.cart_order_id
+                Cart.objects.filter(cart_id=cart_id).delete()
+                
+                # Send confirmation email logic would go here
+                
+                return Response({"message": "Payment Verified and Processed"}, status=status.HTTP_200_OK)
+            else:
+                 return Response({"message": "Payment Already Processed"}, status=status.HTTP_200_OK)
+                 
+        except razorpay.errors.SignatureVerificationError:
+            return Response({'error': 'Invalid payment signature'}, status=status.HTTP_400_BAD_REQUEST)
+        except CartOrder.DoesNotExist:
+            return Response({'error': 'Order not found'}, status=status.HTTP_404_NOT_FOUND)
+        except Exception as e:
+             return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

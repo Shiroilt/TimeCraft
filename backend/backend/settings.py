@@ -168,8 +168,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # STRIPE
-STRIPE_PUBLIC_KEY = env("STRIPE_PUBLIC_KEY")
-STRIPE_SECRETE_KEY = env("STRIPE_SECRETE_KEY")
+STRIPE_PUBLIC_KEY = env("STRIPE_PUBLIC_KEY", default="")
+STRIPE_SECRETE_KEY = env("STRIPE_SECRETE_KEY", default="")
+
+# RAZORPAY
+RAZORPAY_KEY_ID = env("RAZORPAY_KEY_ID", default="rzp_test_placeholder_key_id")
+RAZORPAY_KEY_SECRET = env("RAZORPAY_KEY_SECRET", default="placeholder_secret")
 
 ANYMAIL = {
     "MAILGUN_API_KEY": os.environ.get("MAILGUN_API_KEY"),

@@ -223,7 +223,7 @@ class CartOrderSerializer(serializers.ModelSerializer):
 
     def get_vendor_phone(self, obj):
         """Returns the vendor's mobile number for WhatsApp redirection."""
-        return obj.vendor.mobile if obj.vendor and obj.vendor.mobile else "No vendor phone available"
+        return obj.vendor.mobile if obj.vendor and obj.vendor.mobile else ""
 
 
 class ProductFaqSerializer(serializers.ModelSerializer):

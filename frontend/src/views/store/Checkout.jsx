@@ -45,7 +45,7 @@ function Checkout() {
     }
 
     const redirectToWhatsApp = () => {
-        if (vendorPhone && vendorPhone.trim() !== "") {
+        if (vendorPhone && vendorPhone !== "No vendor phone available" && vendorPhone.trim() !== "") {
             const whatsappUrl = `https://wa.me/${vendorPhone}?text=Hello, I am interested in placing an order with you. Order ID: ${order.oid}`;
             window.location.href = whatsappUrl;
         } else {
@@ -56,7 +56,95 @@ function Checkout() {
             });
         }
     };
-   
+    
+    const loadRazorpayScript = () => {
+        return new Promise((resolve) => {
+            const script = document.createElement("script");
+            script.src = "https://checkout.razorpay.com/v1/checkout.js";
+            script.onload = () => resolve(true);
+            script.onerror = () => resolve(false);
+            document.body.appendChild(script);
+        });
+    };
+
+    const handleRazorpayPayment = async () => {
+        const res = await loadRazorpayScript();
+
+        if (!res) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Razorpay SDK failed to load',
+                text: 'Are you online?',
+            });
+            return;
+        }
+
+        try {
+            const response = await apiInstance.post(`razorpay-checkout/${order.oid}/`);
+            const data = response.data;
+            
+            if (data.error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Payment Initialization Failed',
+                    text: data.error,
+                });
+                return;
+            }
+
+            const options = {
+                key: data.key_id, 
+                amount: data.amount,
+                currency: data.currency,
+                name: "TimeCraft",
+                description: "Order Payment",
+                order_id: data.razorpay_order_id,
+                handler: async function (response) {
+                    try {
+                        const verifyRes = await apiInstance.post('razorpay-payment-verify/', {
+                            razorpay_order_id: response.razorpay_order_id,
+                            razorpay_payment_id: response.razorpay_payment_id,
+                            razorpay_signature: response.razorpay_signature,
+                            order_oid: order.oid
+                        });
+                        
+                        if (verifyRes.data.error) {
+                            Swal.fire({ icon: 'error', title: 'Payment failed' });
+                        } else {
+                            // Navigate to success page
+                            Swal.fire({ icon: 'success', title: 'Payment Successful!' });
+                            window.location.href = `/payment-success/${order.oid}`;
+                        }
+                    } catch (error) {
+                        Swal.fire({ icon: 'error', title: 'Payment verification failed' });
+                    }
+                },
+                prefill: {
+                    name: data.full_name,
+                    email: data.email,
+                    contact: data.mobile
+                },
+                theme: {
+                    color: "#3399cc"
+                }
+            };
+            
+            const rzp = new window.Razorpay(options);
+            rzp.on('payment.failed', function (response){
+                 Swal.fire({ icon: 'error', title: 'Payment Failed', text: response.error.description });
+            });
+            rzp.open();
+
+        } catch (error) {
+            console.log(error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Something went wrong with Razorpay setup!',
+            });
+        }
+    };
+
     
 
   return (
@@ -212,9 +300,12 @@ function Checkout() {
                                  />
                                 <button onClick={applyCoupon} className='btn btn-success ms-1'>Apply</button>
                             </div>
-                            <div>
-                                <button onClick={redirectToWhatsApp} type="button" className="btn btn-success btn-rounded w-100 mt-2">
-                                        Further process <i className='fab fa-whatsapp'></i>
+                            <div className="d-flex flex-column gap-2 mt-2">
+                                <button onClick={handleRazorpayPayment} type="button" className="btn btn-primary btn-rounded w-100">
+                                        Pay with Razorpay <i className='fas fa-credit-card ms-1'></i>
+                                </button>
+                                <button onClick={redirectToWhatsApp} type="button" className="btn btn-success btn-rounded w-100">
+                                        Order via WhatsApp <i className='fab fa-whatsapp ms-1'></i>
                                 </button>
                             </div>
                         </section>
