@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import apiInstance from '../../utils/axios'
 import { useParams } from 'react-router-dom'
+import generateInvoicePdf from '../../utils/generateInvoicePdf'
 
 function PaymentSuccess() {
 
@@ -22,18 +23,18 @@ function PaymentSuccess() {
     }, [param])
 
     useEffect(() => {
+        if (!param?.order_oid) return;
+        
         const formdata = new FormData()
         formdata.append("order_oid", param?.order_oid)
-        formdata.append("session_id", sessionId)
+        formdata.append("session_id", sessionId || "")
 
-
-
-        apiInstance.post(`payment-success/${order.oid}/`, formdata).then((res) => {
+        apiInstance.post(`payment-success/${param.order_oid}/`, formdata).then((res) => {
             console.log(res.data)
-            if (res.data.message === "Payment Successfull"){
+            if (res.data.message === "Payment Successful and Email Sent" || res.data.message === "Payment Successfull"){
                 setStatus("Payment Successfull")
             }
-            if (res.data.message === "Already Paid"){
+            if (res.data.message === "Payment Already Processed" || res.data.message === "Already Paid"){
                 setStatus("Already Paid")
             }
             if (res.data.message === "Your Invoice is Unpaid"){
@@ -122,13 +123,13 @@ function PaymentSuccess() {
                                 >
                                 View Order <i className="fas fa-eye" />{" "}
                                 </button>
-                                <a
-                                href="/"
+                                <button
+                                onClick={() => generateInvoicePdf(order, order.orderitem || [])}
                                 className="btn btn-primary mt-3 ms-2"
                                 >
                                 Download Invoice{" "}
-                                <i className="fas fa-file-invoice" />{" "}
-                                </a>
+                                <i className="fas fa-file-pdf" />{" "}
+                                </button>
                                 <a
                                 className="btn btn-secondary mt-3 ms-2"
                                 >

@@ -523,7 +523,7 @@ class RazorpayCheckoutView(generics.CreateAPIView):
             return Response({'error': 'Order not found'}, status=status.HTTP_404_NOT_FOUND)
 
         # Initialize Razorpay client
-        client = razorpay.Client(auth=(settings.RAZORPAY_KEY_ID, settings.RAZORPAY_KEY_SECRET))
+        client = razorpay.Client(auth=(settings.RAZORPAY_KEY_ID, settings.RAZORPAY_SECRET_KEY))
 
         # Create Razorpay order
         amount = int(order.total * 100) # amount in paisa
