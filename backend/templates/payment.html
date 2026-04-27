@@ -55,12 +55,16 @@
                   alert("Network error during verification.");
                   window.location.href = "{{ frontend_url }}";
               });
+          },
+          "modal": {
+              "ondismiss": function(){
+                  window.location.href = "{{ frontend_url }}checkout/{{ order_oid }}";
+              }
           }
       };
       var rzp = new Razorpay(options);
       rzp.on('payment.failed', function (response){
-           alert("Payment Failed: " + response.error.description);
-           window.location.href = "{{ frontend_url }}";
+           console.error("Payment Failed: " + response.error.description);
       });
       rzp.open();
   </script>
