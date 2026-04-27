@@ -1,16 +1,9 @@
-# Node
-node_modules/
-
-# Python
-venv/
-venv_old/
 __pycache__/
 *.pyc
-
-# IDE
-.idea/
-.vscode/
-
-# OS
-.DS_Store
-Thumbs.db
+db.sqlite3
+backend/.env
+node_modules/
+frontend/dist/
+frontend/build_error.log
+frontend/build_out.txt
+.vite/
