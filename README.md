@@ -5,11 +5,14 @@
 ![React](https://img.shields.io/badge/React-Frontend-61DAFB?logo=react)
 ![AWS](https://img.shields.io/badge/AWS-Deployed-FF9900?logo=amazonaws)
 ![SSL](https://img.shields.io/badge/SSL-Enabled-brightgreen?logo=letsencrypt)
+![n8n](https://img.shields.io/badge/n8n-Automation-EA4B71?logo=n8n)
+![Telegram](https://img.shields.io/badge/Telegram-Bot-26A5E4?logo=telegram)
 ![License](https://img.shields.io/badge/License-MIT-yellow)
 
-> TimeCraft is a full-stack web platform for browsing, customizing, and purchasing wristwatches and accessories — with integrated service booking, subscription plans, technician management, and an AI-powered RAG chatbot.
+> TimeCraft is a full-stack web platform for browsing, customizing, and purchasing wristwatches and accessories — with integrated service booking, subscription plans, technician management, an AI-powered RAG chatbot, and a Telegram bot powered by n8n automation.
 
 🌐 **Live Site:** [https://timecraft.timekeeper.ro](https://timecraft.timekeeper.ro)
+🤖 **Telegram Bot:** [@timecraft_watch_bot](https://t.me/timecraft_watch_bot)
 
 ---
 
@@ -19,6 +22,7 @@
 - [Features](#features)
 - [Tech Stack](#tech-stack)
 - [AI Chatbot (RAG)](#ai-chatbot-rag)
+- [Telegram Bot via n8n](#telegram-bot-via-n8n)
 - [AWS Infrastructure](#aws-infrastructure)
 - [Project Structure](#project-structure)
 - [Getting Started](#getting-started)
@@ -66,6 +70,13 @@ Customers can browse and customize watches, purchase accessories with compatibil
 - Context-aware chatbot specific to TimeCraft's products and services
 - Built using **Retrieval-Augmented Generation (RAG)** technology
 - Answers questions about watches, accessories, services, and orders
+- Accessible on website AND via Telegram bot
+
+### 📱 Telegram Bot (n8n)
+- Users can chat with TimeCraft AI assistant directly on Telegram
+- Powered by **n8n workflow automation** (self-hosted on EC2)
+- Same RAG chatbot engine as the website
+- Available 24/7 at [@timecraft_watch_bot](https://t.me/timecraft_watch_bot)
 
 ---
 
@@ -82,6 +93,8 @@ Customers can browse and customize watches, purchase accessories with compatibil
 | Deployment | AWS EC2 (Ubuntu 24) |
 | Monitoring | AWS CloudWatch + Lambda + SNS |
 | AI Chatbot | RAG (Retrieval-Augmented Generation) |
+| Automation | n8n (self-hosted on EC2) |
+| Telegram Bot | Telegram Bot API + n8n |
 
 ---
 
@@ -121,6 +134,95 @@ Response shown to user in chat UI
 - **Knowledge Base** — watch catalog, service FAQs, accessory data
 - **LLM** — generates final natural language response
 
+### Chatbot API:
+```
+POST /api/v1/send-message/
+Body: { "message": "what watches do you have?", "user_id": 1 }
+```
+
+The chatbot handles:
+- **Product queries** — fetches live product data from database
+- **Order queries** — shows user's real order history
+- **Cart queries** — shows user's current cart
+- **Customer care** — redirects to support page
+- **Off-topic** — politely declines and redirects to TimeCraft topics
+
+---
+
+## 📱 Telegram Bot via n8n
+
+TimeCraft's RAG chatbot is also available on **Telegram** via automated workflow using **n8n** (self-hosted on EC2).
+
+### Telegram Bot:
+```
+🤖 Bot Name: TimeCraft Assistant
+📱 Username: @timecraft_watch_bot
+```
+
+### How it works:
+
+```
+User sends message on Telegram
+        ↓
+Telegram Bot API receives message
+        ↓
+Webhook triggers n8n workflow
+        ↓
+n8n sends message to Django RAG Chatbot API
+POST /api/v1/send-message/
+        ↓
+Django processes with RAG (fetches products, orders etc.)
+        ↓
+n8n receives AI response
+        ↓
+n8n sends reply back to user on Telegram ✅
+```
+
+### n8n Workflow Architecture:
+
+```
+┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
+│  Telegram       │     │  HTTP Request   │     │  Telegram       │
+│  Trigger        │────▶│  (Django API)   │────▶│  Send Message   │
+│  (On Message)   │     │  POST /send-msg │     │  (Reply to user)│
+└─────────────────┘     └─────────────────┘     └─────────────────┘
+```
+
+### n8n Setup Details:
+- **n8n version:** 1.97.1 (Community Edition — Free)
+- **Running on:** Same EC2 instance as Django/React
+- **Port:** 5678 (internal)
+- **Webhook URL:** `https://timecraft.timekeeper.ro/webhook/...`
+- **Nginx:** Proxies `/webhook/` and `/webhook-test/` paths to n8n
+
+### Startup command:
+```bash
+export N8N_SECURE_COOKIE=false
+export WEBHOOK_URL=https://timecraft.timekeeper.ro/
+nohup n8n start &> /tmp/n8n.log &
+```
+
+### Nginx config for n8n webhooks:
+```nginx
+location /webhook/ {
+    proxy_pass http://127.0.0.1:5678;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_http_version 1.1;
+}
+
+location /webhook-test/ {
+    proxy_pass http://127.0.0.1:5678;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_http_version 1.1;
+}
+```
+
 ---
 
 ## ☁️ AWS Infrastructure
@@ -141,14 +243,15 @@ TimeCraft is fully deployed on AWS using the following services:
   - Gunicorn (Django production WSGI server)
   - React production build (dist/ folder served by Nginx)
   - CloudWatch Agent (monitoring)
+  - n8n (workflow automation for Telegram bot)
 
 **Nginx Configuration:**
 ```
 Browser (HTTPS) → Nginx (port 443)
-                    ↙           ↘
-           React /dist/      Django API
-           (static files)    127.0.0.1:8000
-                             (Gunicorn)
+                    ↙           ↘           ↘
+           React /dist/      Django API     n8n
+           (static files)   Gunicorn:8000  :5678
+                                           (webhooks)
 ```
 
 ---
@@ -193,6 +296,7 @@ Browser (HTTPS) → Nginx (port 443)
   - Proxies `/api/` requests to Django (Gunicorn on port 8000)
   - Proxies `/admin/` to Django admin
   - Serves Django static files from `/static/`
+  - Proxies `/webhook/` and `/webhook-test/` to n8n (port 5678)
   - HTTP → HTTPS redirect (port 80 → 443)
   - File upload size limit: 10MB (`client_max_body_size 10M`)
 
@@ -275,25 +379,25 @@ Formatted email sent to admin 📧
                     │   Nginx   │  ← SSL (Let's Encrypt)
                     │  (EC2)    │
                     └─────┬─────┘
-                 ┌────────┴────────┐
-                 ▼                 ▼
-          React Frontend      Django API
-          (/dist/ static)    (Gunicorn :8000)
-                                   │
-                    ┌──────────────┼──────────────┐
-                    ▼              ▼               ▼
-              PostgreSQL        AWS S3         CloudWatch
-               (RDS)         (Media/Files)   (Monitoring)
-                                                   │
-                                            ┌──────┴──────┐
-                                            ▼             ▼
-                                           SNS          Alarm
-                                            │        (CPU > 70%)
-                                            ▼
-                                         Lambda
-                                            │
-                                            ▼
-                                      Email Alert 📧
+          ┌───────────────┼───────────────┐
+          ▼               ▼               ▼
+   React Frontend     Django API        n8n
+   (/dist/ static)   (Gunicorn :8000)  (:5678)
+                           │               │
+           ┌───────────────┼──────┐        ▼
+           ▼               ▼      ▼    Telegram
+     PostgreSQL          AWS S3  CW      Bot
+      (RDS)           (Media) (Monitor)
+                                  │
+                           ┌──────┴──────┐
+                           ▼             ▼
+                          SNS          Alarm
+                           │        (CPU > 70%)
+                           ▼
+                        Lambda
+                           │
+                           ▼
+                     Email Alert 📧
 ```
 
 ---
@@ -320,10 +424,10 @@ TimeCraft/
 │   │   └── wsgi.py             # Gunicorn entry point
 │   ├── api/                    # REST API app
 │   ├── users/                  # User management
-│   ├── products/               # Watch & accessory catalog
+│   ├── store/                  # Watch & accessory catalog
 │   ├── orders/                 # Order management
 │   ├── services/               # Service booking
-│   ├── chatbot/                # RAG chatbot
+│   ├── chatbot/                # RAG chatbot + Telegram API
 │   ├── static/                 # Django static files
 │   ├── venv/                   # Python virtual environment
 │   └── requirements.txt
@@ -340,6 +444,7 @@ TimeCraft/
 - Node.js 18+
 - PostgreSQL
 - Git
+- n8n (for Telegram bot)
 
 ### 1. Clone the repository
 ```bash
@@ -375,8 +480,17 @@ npm install
 npm run dev
 ```
 
+### 6. n8n Setup (for Telegram bot)
+```bash
+npm install -g n8n
+export N8N_SECURE_COOKIE=false
+export WEBHOOK_URL=https://yourdomain.com/
+n8n start
+```
+
 Frontend runs at: `http://localhost:5173`
 Backend runs at: `http://localhost:8000`
+n8n runs at: `http://localhost:5678`
 
 ---
 
@@ -421,6 +535,11 @@ sudo systemctl start nginx
 cd ~/TimeCraft/backend
 source venv/bin/activate
 gunicorn backend.wsgi:application --bind 127.0.0.1:8000 --daemon
+
+# Start n8n (for Telegram bot)
+export N8N_SECURE_COOKIE=false
+export WEBHOOK_URL=https://timecraft.timekeeper.ro/
+nohup n8n start &> /tmp/n8n.log &
 ```
 
 ### When you change Django code
@@ -440,15 +559,18 @@ sudo systemctl restart nginx
 
 ### Check status
 ```bash
-sudo systemctl status nginx       # Nginx status
-ps aux | grep gunicorn            # Gunicorn status
-sudo tail -20 /var/log/nginx/error.log   # Nginx errors
+sudo systemctl status nginx            # Nginx status
+ps aux | grep gunicorn                 # Gunicorn status
+ps aux | grep n8n                      # n8n status
+sudo tail -20 /var/log/nginx/error.log # Nginx errors
+tail -20 /tmp/n8n.log                  # n8n logs
 ```
 
 ### Stop everything
 ```bash
 sudo systemctl stop nginx
 pkill gunicorn
+pkill -9 node                          # Stop n8n
 ```
 
 ---
