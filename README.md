@@ -1,18 +1,13 @@
 # ⌚ TimeCraft — Watch Service Coordination & Customization Platform
 
-![Python](https://img.shields.io/badge/Python-3.12-blue?logo=python)
+![Python](https://img.shields.io/badge/Python-3.10-blue?logo=python)
 ![Django](https://img.shields.io/badge/Django-Backend-green?logo=django)
 ![React](https://img.shields.io/badge/React-Frontend-61DAFB?logo=react)
 ![AWS](https://img.shields.io/badge/AWS-Deployed-FF9900?logo=amazonaws)
 ![SSL](https://img.shields.io/badge/SSL-Enabled-brightgreen?logo=letsencrypt)
 ![n8n](https://img.shields.io/badge/n8n-Automation-EA4B71?logo=n8n)
-![Telegram](https://img.shields.io/badge/Telegram-Bot-26A5E4?logo=telegram)
-![License](https://img.shields.io/badge/License-MIT-yellow)
 
 > TimeCraft is a full-stack web platform for browsing, customizing, and purchasing wristwatches and accessories — with integrated service booking, subscription plans, technician management, an AI-powered RAG chatbot, and a Telegram bot powered by n8n automation.
-
-🌐 **Live Site:** [https://timecraft.timekeeper.ro](https://timecraft.timekeeper.ro)
-🤖 **Telegram Bot:** [@timecraft_watch_bot](https://t.me/timecraft_watch_bot)
 
 ---
 
@@ -54,11 +49,6 @@ Customers can browse and customize watches, purchase accessories with compatibil
 - Book watch servicing
 - Subscribe to periodic service plans
 - Watch-specific dashboard for services & subscriptions
-
-### 🔧 Technician / Service Partner
-- Accept and manage assigned service requests
-- Update service status in real time
-- Upload service images for transparency
 
 ### 🛠️ Admin
 - Manage watches and accessories (full CRUD)
