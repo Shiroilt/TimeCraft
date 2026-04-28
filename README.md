@@ -589,32 +589,22 @@ pkill -9 node                          # Stop n8n
 | US008 | Customer | Checkout & place orders |
 | US009 | Customer | View order history |
 | US010 | Customer | View compatible accessories |
-| US011 | Customer | Get accessory recommendations |
-| US012 | Customer | Book watch servicing |
-| US013 | Customer | Subscribe to service plans |
-| US014 | Customer | Watch-specific dashboard |
-| US015 | Technician | Accept & manage service requests |
-| US016 | Technician | Update service status & upload images |
-| US017 | Admin | Manage watches & accessories |
-| US018 | Admin | Approve service partners |
-| US019 | Admin | View reports & analytics |
+| US011 | Customer | get watch servicing coupon |
+| US012 | Customer | Subscribe to service plans |
+| US013 | Admin | Manage watches & accessories |
+| US014 | Admin | Approve service coupon |
+| US015 | Admin | View reports & analytics |
 
 ---
 
 ## 👥 Team Members
 
-| Name | ID |
-|------|----|
-| Dhrumil Doshi | 202512088 |
-| Harsh Rathod | 202512086 |
-| Shashwat Soni | 202512040 |
-| Deep Soni | 202512089 |
-
----
-
-## 📄 License
-
-This project is licensed under the MIT License.
+| Name          |ID         |Contribution                                                         |
+|---------------|-----------|---------------------------------------------------------------------|
+| Dhrumil Doshi | 202512088 |Frontend/UML/Testing/Docs                                            |
+| Harsh Rathod  | 202512086 |Frontend/UML/SRS/Docs                                                |
+| Shashwat Soni | 202512040 |Backend/Hosting(Ec2+Nginx)/AWS(Ec2,S3,RDS,Lambda,CW,SNS)/N8N/ChatBot |
+| Deep Soni     | 202512089 |Backend/DBMS/Razorpay                                                | 
 
 ---
 
